@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import hotelServiceDTO.bookingListDTO;
 import hotelServiceDTO.memberDTO;
 import util.DBUtil;
 

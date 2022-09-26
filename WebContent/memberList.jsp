@@ -9,6 +9,8 @@
 <title>memberList.jsp</title>
 </head>
 <body>
+<%@ include file="./Header.jsp" %>
+<%@ include file="./Menu.jsp" %>
 <table align="center" border="0" cellpadding="5" cellspacing="2" width="100%" bordercolordark="white" bordercolorlight="black">
 	<tr>
         <td bgcolor="#336699">

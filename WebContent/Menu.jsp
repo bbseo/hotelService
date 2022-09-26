@@ -5,17 +5,18 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Dongle:wght@700&display=swap" rel="stylesheet">
-<link href="Header.css" rel="stylesheet" type="text/css">
-<meta charset="UTF-8">
+<link href="Menu.css" rel="stylesheet" type="text/css">
+<meta charset="utf-8">
 <title>Header</title>
 </head>
 <body>
-	<header class="main_header">
-		<div class="header_content">
-			<p id="header_title">야 여기어때?</p>
-			<p id="header_hotel">🏨 Hotel</p>		
-			<p id="logout">로그아웃</p>
-			<p id="mypage">내정보</p>
+	<header class="admin_menu">
+		<div class="menu_content">
+			<ul>
+				<li><a href="admin?command=memberList">사용자관리</a></li>
+				<li><a href="admin?command=bookingList">예약관리</a></li>
+				<li><a href="admin?command=hotelList">호텔관리</a></li>
+			</ul>
 		</div>
 	</header>
 </body>

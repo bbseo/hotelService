@@ -1,0 +1,140 @@
+package hotelServiceDAO;
+
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
+import hotelServiceDTO.memberDTO;
+import util.DBUtil;
+
+
+public class memberDAO {
+	public static ArrayList<memberDTO> getAllContents() throws SQLException {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<memberDTO> alist = null;
+		String sql = "select * from member";
+		try {
+			con = DBUtil.getConnection();
+			pstmt = con.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			alist = new ArrayList<memberDTO>();
+			while (rset.next()) {
+				alist.add(new memberDTO(rset.getInt(1), rset.getString(2), rset.getString(3), rset.getString(4),
+						rset.getString(5), rset.getString(6), rset.getString(7), rset.getString(8)));
+			}
+		} finally {
+			DBUtil.close(con, pstmt, rset);
+		}
+		return alist;
+	}
+	
+	
+	public static boolean addAdmin(memberDTO am) throws SQLException{
+		Connection con = null;	
+		PreparedStatement pstmt = null;
+		boolean result = false;
+		
+		try {
+			con = DBUtil.getConnection();
+			pstmt = con.prepareStatement("insert into member (id,pw,member_name,tel,email,member_grade,position) values (?,?,?,?,?,'admin','admin')");
+
+	        pstmt.setString(1, am.getId());
+	        pstmt.setString(2, am.getPw());
+	        pstmt.setString(3, am.getMemberName());
+	        pstmt.setString(4, am.getTel());
+	        pstmt.setString(5, am.getEmail());
+	        
+			int count = pstmt.executeUpdate();			
+			if(count != 0){
+				result = true;
+			}
+		}finally{
+			DBUtil.close(con, pstmt);
+		}
+		return result;		
+	}
+	
+	
+	public static memberDTO getContent(int num) throws SQLException{		
+		Connection con = null;	
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		memberDTO am  = null;
+		String sql="select * from member where member_num=?";
+		try {
+			con = DBUtil.getConnection();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, num);	
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()){
+				am = new memberDTO(rset.getInt(1),rset.getString(2),
+						rset.getString(3),rset.getString(4),rset.getString(5),
+						rset.getString(6),rset.getString(7),rset.getString(8));
+			}
+		}finally{
+			DBUtil.close(con, pstmt);
+		}
+		return am;
+	}
+	
+	public  static boolean updateContent(memberDTO am) throws SQLException{
+		Connection con = null;	
+		PreparedStatement pstmt = null;
+		boolean result = false;
+		
+		try {
+			con = DBUtil.getConnection();
+		
+			pstmt = con.prepareStatement("update member set member_name=?, id=?, pw=?, tel=?, email=?, member_grade=?, position=?  where member_num=?");
+			pstmt.setString(1, am.getMemberName());
+			pstmt.setString(2,am.getId());
+			pstmt.setString(3, am.getPw());
+		    pstmt.setString(4, am.getTel());
+		    pstmt.setString(5, am.getEmail());
+		    pstmt.setString(6, am.getMemberGrade());
+		    pstmt.setString(7, am.getPosition());		    
+		    pstmt.setInt(8, am.getMemberNum());
+
+			int count = pstmt.executeUpdate();
+			
+			if(count != 0){
+				result = true;
+			}
+		}finally{
+			DBUtil.close(con, pstmt);
+		}
+		return result;
+	}
+	
+	
+	public static boolean deleteContent(int num, String pw) throws SQLException{
+		Connection con = null;	
+		PreparedStatement pstmt = null;
+		boolean result = false;
+		
+		String sql="delete from member where member_num=? and pw=?";
+		
+		try {
+			con = DBUtil.getConnection();
+			pstmt = con.prepareStatement(sql);
+
+			pstmt.setInt(1,num);
+	        pstmt.setString(2,pw);
+
+			int count = pstmt.executeUpdate();
+			
+			if(count != 0){
+				result = true;
+			}
+		}finally{
+			DBUtil.close(con, pstmt);
+		}
+		return result;
+	}
+}

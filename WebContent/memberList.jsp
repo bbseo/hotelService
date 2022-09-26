@@ -9,8 +9,6 @@
 <title>memberList.jsp</title>
 </head>
 <body>
-<jsp:include page ="./fix/header.jsp"/>
-<jsp:include page ="./fix/menu.jsp"/>
 <table align="center" border="0" cellpadding="5" cellspacing="2" width="100%" bordercolordark="white" bordercolorlight="black">
 	<tr>
         <td bgcolor="#336699">
@@ -80,11 +78,11 @@
 		        </td>
 		        <td bgcolor="">
 		            <p align="center"><span style="font-size:9pt;">
-		             ${data.position}</span></p>
+		             ${data.authority}</span></p>
 		        </td>
 		        <td bgcolor="">
 		            <p align="center"><span style="font-size:9pt;">
-		            <a href="member?command=memberchange&num=${data.memberNum}">수정하기</a></span></p>
+		            <a href="admin?command=memberchange&num=${data.memberNum}">수정하기</a></span></p>
 		        </td>
 		    </tr>
 	</c:forEach>

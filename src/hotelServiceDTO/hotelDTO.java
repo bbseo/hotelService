@@ -10,9 +10,9 @@ import lombok.NoArgsConstructor;
 public class hotelDTO {
 	private int hotelNum;
 	private String hotelName;
-	private String hoteIimage;
+	private String hotelImagePath;
 	private double star;
-	private String location;
-	private String hotelGrade;
+	private String hotelLocation;
+	private int hotelGrade;
 	
 }

@@ -16,7 +16,7 @@
 </head>
 <body>
 
-	<%response.sendRedirect("member");%>
+	<%response.sendRedirect("admin");%>
 
 	
 

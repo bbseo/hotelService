@@ -26,7 +26,7 @@ public class hotelDAO {
 			alist = new ArrayList<hotelDTO>();
 			while (rset.next()) {
 				alist.add(new hotelDTO(rset.getInt(1), rset.getString(2), rset.getString(3), rset.getDouble(4),
-						rset.getString(5), rset.getString(6)));
+						rset.getString(5), rset.getInt(6)));
 			}
 			System.out.println(alist);
 		} finally {

@@ -26,7 +26,7 @@ function sendDelete(){
 </script>
 </head>
 <body>
-	<form name="requestForm" method=post action="member">
+	<form name="requestForm" method=post action="admin">
 		<table align="center" cellpadding="5" cellspacing="1" width="600" border="1">
 			<tr>
 				<td width="1220" height="20" colspan="2" bgcolor="#336699">
@@ -103,8 +103,8 @@ function sendDelete(){
 					</p>
 				</td>
 				<td width="450" height="20"><b><span
-						style="font-size: 9pt;"> <input type=text name="position"
-							size="50" value="${resultContent.position}"></span></b></td>
+						style="font-size: 9pt;"> <input type=text name="authority"
+							size="50" value="${resultContent.authority}"></span></b></td>
 			</tr>
 
 			<tr>

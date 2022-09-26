@@ -36,7 +36,7 @@ function checkValid() {
 </head>
 <body>
 
-<form name="addAdmin" method="post" action="member" onSubmit='return checkValid()'>
+<form name="addAdmin" method="post" action="admin" onSubmit='return checkValid()'>
 
 <input type="hidden" name="command" value="addAdmin">
 

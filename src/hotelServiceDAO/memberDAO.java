@@ -25,7 +25,7 @@ public class memberDAO {
 			alist = new ArrayList<memberDTO>();
 			while (rset.next()) {
 				alist.add(new memberDTO(rset.getInt(1), rset.getString(2), rset.getString(3), rset.getString(4),
-						rset.getString(5), rset.getString(6), rset.getString(7), rset.getString(8)));
+						rset.getString(5), rset.getString(6), rset.getInt(7), rset.getString(8)));
 			}
 		} finally {
 			DBUtil.close(con, pstmt, rset);
@@ -41,7 +41,7 @@ public class memberDAO {
 		
 		try {
 			con = DBUtil.getConnection();
-			pstmt = con.prepareStatement("insert into member (id,pw,member_name,tel,email,member_grade,position) values (?,?,?,?,?,'admin','admin')");
+			pstmt = con.prepareStatement("insert into member (member_id,member_pw,member_name,tel,email,member_grade,authority) values (?,?,?,?,?,0,'admin')");
 
 	        pstmt.setString(1, am.getId());
 	        pstmt.setString(2, am.getPw());
@@ -75,7 +75,7 @@ public class memberDAO {
 			if(rset.next()){
 				am = new memberDTO(rset.getInt(1),rset.getString(2),
 						rset.getString(3),rset.getString(4),rset.getString(5),
-						rset.getString(6),rset.getString(7),rset.getString(8));
+						rset.getString(6),rset.getInt(7),rset.getString(8));
 			}
 		}finally{
 			DBUtil.close(con, pstmt);
@@ -91,14 +91,14 @@ public class memberDAO {
 		try {
 			con = DBUtil.getConnection();
 		
-			pstmt = con.prepareStatement("update member set member_name=?, id=?, pw=?, tel=?, email=?, member_grade=?, position=?  where member_num=?");
+			pstmt = con.prepareStatement("update member set member_name=?, member_id=?, member_pw=?, tel=?, email=?, member_grade=?, authority=?  where member_num=?");
 			pstmt.setString(1, am.getMemberName());
 			pstmt.setString(2,am.getId());
 			pstmt.setString(3, am.getPw());
 		    pstmt.setString(4, am.getTel());
 		    pstmt.setString(5, am.getEmail());
-		    pstmt.setString(6, am.getMemberGrade());
-		    pstmt.setString(7, am.getPosition());		    
+		    pstmt.setInt(6, am.getMemberGrade());
+		    pstmt.setString(7, am.getAuthority());		    
 		    pstmt.setInt(8, am.getMemberNum());
 
 			int count = pstmt.executeUpdate();
@@ -118,7 +118,7 @@ public class memberDAO {
 		PreparedStatement pstmt = null;
 		boolean result = false;
 		
-		String sql="delete from member where member_num=? and pw=?";
+		String sql="delete from member where member_num=? and member_pw=?";
 		
 		try {
 			con = DBUtil.getConnection();

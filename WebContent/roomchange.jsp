@@ -9,19 +9,15 @@
 <title>update.jsp</title>
 <script language=javascript>
 function sendUpdate(){
-		document.requestForm.command.value ="hotelupdate";
+		document.requestForm.command.value ="roomupdate";
 		document.requestForm.submit();
 }
 
 function sendDelete(){
-		document.requestForm.command.value ="hoteldelete";
+		document.requestForm.command.value ="roomdelete";
 		document.requestForm.submit();			
 }	
 
-function sendRoom(){
-		document.requestForm.command.value ="roomList";
-		document.requestForm.submit();			
-}	
 </script>
 </head>
 <body>
@@ -31,59 +27,72 @@ function sendRoom(){
 				<td width="1220" height="20" colspan="2" bgcolor="#336699">
 					<p align="center">
 						<font color="white" size="3"><b>
-								${resultContent.hotelNum}번 호텔 수정하기</b></font>
+								${resultContent.roomNum}번 방 수정하기</b></font>
 					</p>
 				</td>
+			</tr>
+
+			<tr>
+				<td width="150" height="20">
+					<p align="right">
+						<b><span style="font-size: 9pt;">방 호수</span></b>
+					</p>
+				</td>
+				<td width="450" height="20"><b><span
+						style="font-size: 9pt;"> <input type=text name="roomName"
+							size="30" value="${resultContent.roomName}"></span></b></td>
 			</tr>
 			<tr>
 				<td width="150" height="20">
 					<p align="right">
-						<b><span style="font-size: 9pt;">호텔 이름</span></b>
+						<b><span style="font-size: 9pt;">방 이미지</span></b>
 					</p>
 				</td>
 				<td width="450" height="20"><b><span
-						style="font-size: 9pt;"> <input type=text name="name"
-							size="30" value="${resultContent.hotelName}"></span></b></td>
+						style="font-size: 9pt;"> <input type=text name="roomImage"
+							size="50" value="${resultContent.roomImage}"></span></b></td>
+			</tr>
+
+			<tr>
+				<td width="150" height="20">
+					<p align="right">
+						<b><span style="font-size: 9pt;">현재 손님 수</span></b>
+					</p>
+				</td>
+				<td width="450" height="20"><b><span
+						style="font-size: 9pt;"> <input type=text name="guestNum"
+							size="50" value="${resultContent.guestNum}"></span></b></td>
 			</tr>
 			<tr>
 				<td width="150" height="20">
 					<p align="right">
-						<b><span style="font-size: 9pt;">호텔 이미지</span></b>
+						<b><span style="font-size: 9pt;">최대 손님 수</span></b>
 					</p>
 				</td>
 				<td width="450" height="20"><b><span
-						style="font-size: 9pt;"> <input type=text name="img"
-							size="30" value="${resultContent.hotelImagePath}"></span></b></td>
+						style="font-size: 9pt;"> <input type=text name="maxGuestNum"
+							size="50" value="${resultContent.maxGuestNum}"></span></b></td>
 			</tr>
 			<tr>
 				<td width="150" height="20">
 					<p align="right">
-						<b><span style="font-size: 9pt;">평점</span></b>
+						<b><span style="font-size: 9pt;">가격</span></b>
 					</p>
 				</td>
 				<td width="450" height="20"><b><span
-						style="font-size: 9pt;"> <input type=text name="star"
-							size="50" value="${resultContent.star}"></span></b></td>
+						style="font-size: 9pt;"> <input type=text name="price"
+							size="50" value="${resultContent.price}"></span></b></td>
 			</tr>
-			<tr>
+			
+				<tr>
 				<td width="150" height="20">
 					<p align="right">
-						<b><span style="font-size: 9pt;">호텔 위치</span></b>
+						<b><span style="font-size: 9pt;">카테고리</span></b>
 					</p>
 				</td>
 				<td width="450" height="20"><b><span
-						style="font-size: 9pt;"> <input type=text name="location"
-							size="50" value="${resultContent.hotelLocation}"></span></b></td>
-			</tr>
-			<tr>
-				<td width="150" height="20">
-					<p align="right">
-						<b><span style="font-size: 9pt;">호텔 등급</span></b>
-					</p>
-				</td>
-				<td width="450" height="20"><b><span
-						style="font-size: 9pt;"> <input type=text name="hotelgrade"
-							size="50" value="${resultContent.hotelGrade}"></span></b></td>
+						style="font-size: 9pt;"> <input type=text name="category"
+							size="50" value="${resultContent.category}"></span></b></td>
 			</tr>
 
 			<tr>
@@ -93,11 +102,10 @@ function sendRoom(){
 					</p>
 				</td>
 				<td height="20" colspan="3">
-				<input type=hidden name=num	value="${requestScope.resultContent.hotelNum}"> 
+				<input type=hidden name=num	value="${requestScope.resultContent.roomNum}"> 
 				<input type=hidden name="command" value=""> 
 				<input type=button value="수정하기" onClick="sendUpdate()">
 				<input type=button value="삭제하기" onClick="sendDelete()">
-				<input type=button value="방정보" onClick="sendRoom()">
 				</td>
 			</tr>
 

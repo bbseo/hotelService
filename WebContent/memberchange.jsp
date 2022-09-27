@@ -26,7 +26,9 @@ function sendDelete(){
 </script>
 </head>
 <body>
-	<form name="requestForm" method=post action="admin">
+	<form name="requestForm" method=post action="adm.
+	
+	in">
 		<table align="center" cellpadding="5" cellspacing="1" width="600" border="1">
 			<tr>
 				<td width="1220" height="20" colspan="2" bgcolor="#336699">

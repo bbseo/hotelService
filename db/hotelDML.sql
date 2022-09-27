@@ -21,3 +21,16 @@ insert into room(hotel_num, room_name, room_image_path, price, category) values(
 insert into room(hotel_num, room_name, room_image_path, price, category) values(4, "301", "https://image.goodchoice.kr/resize_370x220/affiliate/2017/06/02/5931273170a1b.jpg", 70000, "Delux");
 insert into room(hotel_num, room_name, room_image_path, price, category) values(4, "301", "https://image.goodchoice.kr/resize_370x220/affiliate/2017/06/02/5931273170a1b.jpg", 90000, "Suite");
 
+insert into bookingList(member_num,room_num,checkin_date,checkout_date) values (1,1,'2022-09-26','2022-09-27');
+
+select * from bookingList;
+
+select * from member;
+
+select b.*,m.member_id from bookingList as b left join member as m on b.member_num=m.member_num where booking_num=1;
+
+select * from hotel;
+select * from room;
+
+delete from hotel where hotel_num=1;
+

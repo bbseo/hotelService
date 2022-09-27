@@ -31,8 +31,8 @@ create table bookinglist (
 	room_num int not null,
 	checkin_date date not null,
     checkout_date date not null,
-    booked_date timestamp not null,
-    booked_cancel_date timestamp not null
+    booked_date timestamp not null default now(),
+    booked_cancel_date timestamp default null
 );
 
 create table room (
@@ -47,6 +47,6 @@ create table room (
 	category varchar(20) not null
 );
 
-alter table room add foreign key(hotel_num) references hotel(hotel_num);
-alter table bookinglist add foreign key(room_num) references room(room_num);
+alter table room add foreign key(hotel_num) references hotel(hotel_num) on delete cascade;
+alter table bookinglist add foreign key(room_num) references room(room_num)  on delete cascade;
 alter table bookinglist add foreign key(member_num) references member(member_num);

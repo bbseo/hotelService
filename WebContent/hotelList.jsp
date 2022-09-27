@@ -69,5 +69,6 @@
 	</c:forEach>
 </table>
 <hr>
+<div align=right><span style="font-size:9pt;">&lt;<a href="addHotel.jsp">호텔 추가</a>&gt;</span></div>
 </body>
 </html>

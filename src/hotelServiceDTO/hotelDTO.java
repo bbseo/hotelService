@@ -14,5 +14,12 @@ public class hotelDTO {
 	private double star;
 	private String hotelLocation;
 	private int hotelGrade;
+
 	
+	public hotelDTO(String name, String img, String location, int grade) {
+		this.hotelName=name;
+		this.hotelImagePath=img;
+		this.hotelLocation=location;
+		this.hotelGrade=grade;
+	}
 }

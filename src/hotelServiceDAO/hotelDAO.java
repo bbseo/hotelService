@@ -35,6 +35,31 @@ public class hotelDAO {
 		return alist;
 	}
 	
+	public static boolean addHotel(hotelDTO am) throws SQLException{
+		Connection con = null;	
+		PreparedStatement pstmt = null;
+		boolean result = false;
+		
+		try {
+			con = DBUtil.getConnection();
+			pstmt = con.prepareStatement("insert into hotel (hotel_name,hotel_image,hotel_location,hotel_grade) values (?,?,?,?)");
+
+	        pstmt.setString(1, am.getHotelName());
+	        pstmt.setString(2, am.getHotelImagePath());
+	        pstmt.setString(3, am.getHotelLocation());
+	        pstmt.setInt(4, am.getHotelGrade());
+	        
+			int count = pstmt.executeUpdate();			
+			if(count != 0){
+				result = true;
+			}
+		}finally{
+			DBUtil.close(con, pstmt);
+		}
+		return result;		
+	}
+	
+	
 	public static hotelDTO getContent(int num) throws SQLException{		
 		Connection con = null;	
 		PreparedStatement pstmt = null;
@@ -73,6 +98,30 @@ public class hotelDAO {
 		    pstmt.setInt(5, am.getHotelGrade());
 		    pstmt.setInt(6, am.getHotelNum());
 		    
+
+			int count = pstmt.executeUpdate();
+			
+			if(count != 0){
+				result = true;
+			}
+		}finally{
+			DBUtil.close(con, pstmt);
+		}
+		return result;
+	}
+	
+	public static boolean deleteContent(int num) throws SQLException{
+		Connection con = null;	
+		PreparedStatement pstmt = null;
+		boolean result = false;
+		
+		String sql="delete from hotel where hotel_num=?";
+		
+		try {
+			con = DBUtil.getConnection();
+			pstmt = con.prepareStatement(sql);
+
+			pstmt.setInt(1,num);
 
 			int count = pstmt.executeUpdate();
 			

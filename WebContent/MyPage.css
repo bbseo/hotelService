@@ -1,4 +1,4 @@
-@charset "UTF-8"; 
+@charset "UTF-8";
 
 body {
 	margin: 0;
@@ -33,25 +33,7 @@ body {
 	font-family: 'Dongle', sans-serif;
 }
 
-.logout_box {
-	display: inline;
-	
-}
-
-#mypage {
-	height: 3.5rem;
-	margin: 0;
-	padding: 0;
-	float: right;
-	font-size: 3rem;
-	font-weight: bold;
-	color: #BE8C63;
-	margin-right: 3rem;
-	font-family: 'Dongle', sans-serif;
-	cursor: pointer;
-}
-
-#logout {
+#logOut {
 	height: 3.5rem;
 	margin: 0;
 	padding: 0;
@@ -61,5 +43,4 @@ body {
 	font-weight: bold;
 	color: #BE8C63;
 	font-family: 'Dongle', sans-serif;
-	cursor: pointer;
 }

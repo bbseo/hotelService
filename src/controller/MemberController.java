@@ -12,10 +12,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import hotelServiceDAO.bookingDAO;
 import hotelServiceDAO.hotelDAO;
+import hotelServiceDAO.memberDAO;
 import hotelServiceDAO.roomDAO;
+import hotelServiceDTO.memberDTO;
 
 @WebServlet("/member")
 public class MemberController extends HttpServlet {
@@ -37,6 +40,16 @@ public class MemberController extends HttpServlet {
 			bookingForm(request, response);
 		}
 		
+		HttpSession memberSession = request.getSession();
+		
+		String memberId = (String)memberSession.getAttribute("memberId");
+		
+		try {
+			memberDTO member = new memberDAO().selectMember(memberId);
+			System.out.println(member);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		
 	}
 		

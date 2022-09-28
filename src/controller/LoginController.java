@@ -58,7 +58,7 @@ public class LoginController extends HttpServlet {
 		
 		if(result == "Admin") {
 			adminSession.setAttribute("adminId" , id);
-			System.out.println(adminSession.getAttribute("adminId"));
+			System.out.println("dfasdfsdfasd"+adminSession.getAttribute("adminId"));
 			response.sendRedirect("memberPage.jsp");
 		} 
 		else if(result == "Member") {

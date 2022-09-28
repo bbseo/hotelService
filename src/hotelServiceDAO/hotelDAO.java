@@ -14,15 +14,40 @@ import util.DBUtil;
 public class hotelDAO {
 
 	// 모든 게시물 조회
-	public static ArrayList<hotelDTO> getAllContents() throws SQLException {
+	public static ArrayList<hotelDTO> getAllContents(String name, String location) throws SQLException {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		ArrayList<hotelDTO> alist = null;
 		String sql = "select * from hotel";
+		
+		if(name.equals("")) {
+			sql += " where hotel_name is not null";
+		} else {
+			sql += " where hotel_name = ?";
+		}
+		if(location.equals("")) {
+			sql += " and hotel_location is not null";
+		} else {
+			sql += " and hotel_location = ?";
+		}
+		
 		try {
 			con = DBUtil.getConnection();
 			pstmt = con.prepareStatement(sql);
+			
+			if(name.equals("")) {
+				if(!location.equals("")) {
+					pstmt.setString(1, location);				
+				} 
+			} else {
+				pstmt.setString(1, name);				
+				if(!location.equals("")) {
+					pstmt.setString(2, location);
+				}
+			}
+					
+			
 			rset = pstmt.executeQuery();
 			alist = new ArrayList<hotelDTO>();
 			while (rset.next()) {

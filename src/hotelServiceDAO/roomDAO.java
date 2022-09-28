@@ -36,16 +36,40 @@ public class roomDAO {
 		return alist;
 	}
 
-	public static ArrayList<roomDTO> getRoomContents2(int hotelNum) throws SQLException {
+	public static ArrayList<roomDTO> getRoomContents2(int hotelNum,String name, String category) throws SQLException {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		ArrayList<roomDTO> alist = null;
 		String sql = "select * from room where hotel_num=?";
+		
+		if(name.equals("")) {
+			sql += " and room_name is not null";
+		} else {
+			sql += " and room_name = ?";
+		}
+		if(category.equals("all")) {
+			sql += " and category is not null";
+		} else {
+			sql += " and category = ?";
+		}
+		
+		System.out.println(hotelNum);
+		System.out.println(category);
 		try {
 			con = DBUtil.getConnection();
 			pstmt = con.prepareStatement(sql);
-			pstmt.setInt(1, hotelNum);
+			pstmt.setInt(1, hotelNum);					
+			if(name.equals("")) {
+				if(!category.equals("all")) {
+					pstmt.setString(2, category);					
+				}
+			} else {
+				pstmt.setString(2, name);					
+				if(!category.equals("all")) {
+					pstmt.setString(3, category);					
+				}
+			}
 			rset = pstmt.executeQuery();
 			alist = new ArrayList<roomDTO>();
 			while (rset.next()) {
@@ -129,7 +153,6 @@ public class roomDAO {
 			if(count != 0){
 				result = true;
 			}
-			System.out.println(result);
 		}finally{
 			DBUtil.close(con, pstmt);
 		}

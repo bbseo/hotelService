@@ -13,6 +13,29 @@
 <%@ include file="./Menu.jsp" %>
 <table align="center" border="0" cellpadding="5" cellspacing="2" width="100%" bordercolordark="white" bordercolorlight="black">
 	<tr>
+      <td bgcolor="#336699">
+            <p align="center"><font color="white"><b><span style="font-size:9pt;">
+               <form name="search_room_list" method="post" action="admin">
+               <input type="hidden" name="command" value="roomList">               
+               <input type="hidden" name="num" value="${requestScope.test}">               
+                  <td width="450" height="20" ><b><span style="font-size:9pt;">
+               		이름:<input type=text name="room_name" size="50">
+               		카테고리 :<select id="category" name="category">
+                     <option value="all">모두</option>
+                     <option value="Standard">스탠다드</option>
+                     <option value="Delux">디럭스</option>
+                     <option value="Suite">스위트</option>
+                  </select></span></b></td>
+                  <td>
+                  	<input type="submit" value="검색">
+                  </td>
+               </form>
+            </span></b></font></p>
+        </td>
+   </tr>
+</table>
+<table align="center" border="0" cellpadding="5" cellspacing="2" width="100%" bordercolordark="white" bordercolorlight="black">
+	<tr>
         <td bgcolor="#336699">
             <p align="center"><font color="white"><b><span style="font-size:9pt;">호텔코드</span></b></font></p>
         </td>

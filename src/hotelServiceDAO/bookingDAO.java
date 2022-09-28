@@ -17,15 +17,27 @@ import util.DBUtil;
 
 
 public class bookingDAO {
-	public static ArrayList<bookingListDTO> getAllContents() throws SQLException {
+	public static ArrayList<bookingListDTO> getAllContents(String name) throws SQLException {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		ArrayList<bookingListDTO> alist = null;
-		String sql = "select b.*,m.member_id from bookingList as b left join member as m on b.member_num=m.member_num";
+		String sql = "select b.*,m.member_name from bookingList as b left join member as m on b.member_num=m.member_num";
+		
+		if(name.equals("")) {
+			sql += " where m.member_name is not null";
+		} else {
+			sql += " where m.member_name = ?";
+		}
+
 		try {
 			con = DBUtil.getConnection();
 			pstmt = con.prepareStatement(sql);
+			
+			if(!name.equals("")) {
+				pstmt.setString(1, name);						
+			} 	
+			
 			rset = pstmt.executeQuery();
 			alist = new ArrayList<bookingListDTO>();
 			while (rset.next()) {
@@ -87,7 +99,6 @@ public class bookingDAO {
 	}
 	
 	public static ArrayList<roomDTO> getRoomContents(int hotelNum) throws SQLException {
-		System.out.println("roomDAO");
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -103,7 +114,6 @@ public class bookingDAO {
 				alist.add(new roomDTO(rset.getInt(1), rset.getInt(2), rset.getString(3), rset.getString(4),
 						rset.getString(5), rset.getInt(6), rset.getInt(7),rset.getInt(8),rset.getString(9)));
 			}
-			System.out.println("room"+alist);
 		} finally {
 			DBUtil.close(con, pstmt, rset);
 		}
@@ -111,7 +121,6 @@ public class bookingDAO {
 }
 
 	   public static List<Object> getbookingForm(int hotelNum, String category, String checkIn, String checkOut) throws SQLException {
-		      System.out.println("getbookingForm DAO : "+category+" / "+hotelNum+" / "+checkIn+" / "+checkOut);
 		      
 		      Connection con = null;
 		      PreparedStatement pstmt = null;
@@ -132,6 +141,7 @@ public class bookingDAO {
 		      rset = pstmt.executeQuery();
 		      while(rset.next()) {
 		         Map<String, String> hm = new HashMap<>();
+		         
 		         hm.put("roomName",rset.getString("room_name"));
 		         hm.put("maxGuestNum", Integer.toString(rset.getInt("max_guest_num")));
 		         hm.put("price", Integer.toString(rset.getInt("price")));
@@ -147,7 +157,6 @@ public class bookingDAO {
 //		         hm.put("roomState", rset.getString("room_state"));
 		         list.add(hm);
 		      }
-		      System.out.println(list);
 		      return list;
 		   }
 	

@@ -13,6 +13,22 @@
 <%@ include file="./Menu.jsp" %>
 <table align="center" border="0" cellpadding="5" cellspacing="2" width="100%" bordercolordark="white" bordercolorlight="black">
 	<tr>
+      <td bgcolor="#336699">
+            <p align="center"><font color="white"><b><span style="font-size:9pt;">
+               <form name="search_member_list" method="post" action="admin">
+               <input type="hidden" name="command" value="bookingList">
+                  <td width="450" height="20" ><b><span style="font-size:9pt;">
+               		<input type=text name="name" size="50"></span></b></td>
+                  <td>
+                  	<input type="submit" value="검색">
+                  </td>
+               </form>
+            </span></b></font></p>
+        </td>
+   </tr>
+</table>
+<table align="center" border="0" cellpadding="5" cellspacing="2" width="100%" bordercolordark="white" bordercolorlight="black">
+	<tr>
         <td bgcolor="#336699">
             <p align="center"><font color="white"><b><span style="font-size:9pt;">예약 코드</span></b></font></p>
         </td>
@@ -33,9 +49,6 @@
         </td>
         <td bgcolor="#336699">
             <p align="center"><font color="white"><b><span style="font-size:9pt;">예약취소날짜</span></b></font></p>
-        </td>
-        <td bgcolor="#336699">
-            <p align="center"><font color="white"><b><span style="font-size:9pt;">수정하기</span></b></font></p>
         </td>
     </tr>
     
@@ -74,10 +87,6 @@
 		        <td bgcolor="">
 		            <p align="center"><span style="font-size:9pt;">
 		             ${data.booked_cancel_date}</span></p>
-		        </td>
-		        <td bgcolor="">
-		            <p align="center"><span style="font-size:9pt;">
-		            <a href="admin?command=bookingdelete&num=${data.bookingNum}">삭제하기</a></span></p>
 		        </td>
 		    </tr>
 	</c:forEach>

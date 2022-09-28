@@ -13,6 +13,23 @@
 <%@ include file="./Menu.jsp" %>
 <table align="center" border="0" cellpadding="5" cellspacing="2" width="100%" bordercolordark="white" bordercolorlight="black">
 	<tr>
+      <td bgcolor="#336699">
+            <p align="center"><font color="white"><b><span style="font-size:9pt;">
+               <form name="search_member_list" method="post" action="admin">
+               <input type="hidden" name="command" value="hotelList">
+                  <td width="450" height="20" ><b><span style="font-size:9pt;">
+               		이름:<input type=text name="name" size="50"></span></b></td>
+               		위치 :<input type=text name="location" size="50"></span></b></td>
+                  <td>
+                  	<input type="submit" value="검색">
+                  </td>
+               </form>
+            </span></b></font></p>
+        </td>
+   </tr>
+</table>
+<table align="center" border="0" cellpadding="5" cellspacing="2" width="100%" bordercolordark="white" bordercolorlight="black">
+	<tr>
         <td bgcolor="#336699">
             <p align="center"><font color="white"><b><span style="font-size:9pt;">호텔 이름</span></b></font></p>
         </td>

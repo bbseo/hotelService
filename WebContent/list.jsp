@@ -1,4 +1,4 @@
-﻿<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+﻿<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
@@ -38,13 +38,12 @@
 	</c:if> --%>
 
 	<%-- ArrayList에  GuestBookBean 객체를 하나하나 data라는 반복 대입해서 사용 --%>
+<%@include file ="./Header.jsp" %>
 	<c:forEach items="${requestScope.hotel}" var="hotel">
 		    <tr>
 		        <td bgcolor="">
 		            <p align="center"><span style="font-size:9pt;">
 		            <img alt="" src="${hotel.hotelImagePath}" onclick="location.href='member?command=room&hotelNum=${hotel.hotelNum}'"></span></p>
-		            
-		            
 		        </td>
 		        <%-- <td bgcolor="">
 					<p align="center"><span style="font-size:9pt;">

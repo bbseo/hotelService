@@ -67,7 +67,7 @@ public class roomDAO {
 			con = DBUtil.getConnection();
 			pstmt = con.prepareStatement("insert into room (hotel_num,room_name,room_image_path,max_guest_num,price,category) values (?,?,?,?,?,?)");
 
-	        pstmt.setInt(1, am.getHotelnum());
+	        pstmt.setInt(1, am.getHotelNum());
 	        pstmt.setString(2, am.getRoomName());
 	        pstmt.setString(3, am.getRoomImage());
 	        pstmt.setInt(4, am.getMaxGuestNum());

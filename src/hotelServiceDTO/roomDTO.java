@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Data
 public class roomDTO {
 	private int roomNum;
-	private int hotelnum;
+	private int hotelNum;
 	private String roomName;
 	private String roomImage;
 	private String roomState;
@@ -19,7 +19,7 @@ public class roomDTO {
 	private String category;
 	
 	public roomDTO(int hotelnum, String roomname, String img, int max_guest, int price, String category) {
-		this.hotelnum=hotelnum;
+		this.hotelNum=hotelnum;
 		this.roomName=roomname;
 		this.roomImage=img;
 		this.maxGuestNum=max_guest;

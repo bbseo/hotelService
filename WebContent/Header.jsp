@@ -16,23 +16,15 @@
 			<p id="header_title">야 여기어때?</p>
 			<p id="header_hotel">🏨 Hotel</p>
 			<div class="logout_box">
-				<form  name="logOut">
-					<input type="hidden" name="command" value="logout">	
-					<p id="logout" onclick="logout()">로그아웃</p>
-					<p id="mypage" onclick="location='MyPage.jsp'">내정보</p>
-				</form>	
+				<form method="post" name="logOut">
+					<input type="submit" id="logout" name="command" value="Log Out" formaction="login">	
+					<input type="submit" id="mypage" name="command" value="MyPage" formaction="member">
+				</form>
 			</div>	
 		</div>
 	</header>
 	
 	<script type="text/javascript">
-		function logout() {
-			const logoutForm = document.logOut;
-			
-			logoutForm.method = "post";
-			logoutForm.action = "login";
-			logoutForm.submit();
-		}
 	</script>
 </body>
 </html>

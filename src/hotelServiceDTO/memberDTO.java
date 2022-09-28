@@ -25,4 +25,11 @@ public class memberDTO {
 		this.email = email;
 	}
 	
+	public memberDTO(String id, String name, String tel, String email, int grade) {
+		this.id = id;
+		this.memberName = name;
+		this.tel = tel;
+		this.email = email;
+		this.memberGrade = grade;
+	}
 }

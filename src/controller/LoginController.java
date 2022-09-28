@@ -22,6 +22,7 @@ public class LoginController extends HttpServlet {
 		response.setContentType("text/html; charset=UTF-8");
 		
 		String command = request.getParameter("command");
+		System.out.println(command);
 		
 		if(command == null) {
 			
@@ -35,7 +36,7 @@ public class LoginController extends HttpServlet {
 			checkId(response, request);
 		} else if(command.equals("findPw")) {
 			findPw(response, request);
-		} else if(command.equals("logout")) {
+		} else if(command.equals("Log Out")) {
 			logOut(response, request);
 		}
 		
@@ -137,10 +138,9 @@ public class LoginController extends HttpServlet {
 	
 	public void logOut(HttpServletResponse response, HttpServletRequest request) throws IOException {
 		HttpSession session = request.getSession(false);
-		System.out.println(session.getAttribute("memberId"));
-		System.out.println(session.getAttribute("adminId"));
+		System.out.println("meberSession : " + session.getAttribute("memberId"));
+		System.out.println("adminSession : " + session.getAttribute("adminId"));
 		session.invalidate();
-		
 		response.sendRedirect("index.html");
 	}
 

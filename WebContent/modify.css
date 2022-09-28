@@ -51,6 +51,7 @@ body {
 	font-size: 5rem;
 	color: #BE8C63;
 	margin:0;
+	margin-top: 5rem;
 	font-weight: bold;
 	font-family: 'Dongle', sans-serif;
 }
@@ -89,7 +90,8 @@ body {
 .modify {
 	width: 6rem;
 	position: relative;
-	left:42%;
+	left:50%;
+	transform: translateX(-50%);
 	top: 1rem;
 	font-family: 'Dongle', sans-serif;
 	font-size: 2rem;
@@ -100,17 +102,14 @@ body {
 	background: #F8EDE3;
 }
 
-.delete {
-	width: 6rem;
-	position: relative;
-	left:48%;
-	top: 1rem;
+.input {
+	width: 20rem;
+	height: 3rem;
+	border: none;
+	text-align: center;
 	font-family: 'Dongle', sans-serif;
-	font-size: 2rem;
+	font-size: 3rem;
+	font-weight: bold;
 	color: #BE8C63;
-	cursor: pointer;
-	border: 2px solid #BE8C63;
-	border-radius: 5px;
-	background: #F8EDE3;
-	
+	outline: none;
 }

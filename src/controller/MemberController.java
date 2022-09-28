@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.smartcardio.CommandAPDU;
 
 import hotelServiceDAO.bookingDAO;
 import hotelServiceDAO.hotelDAO;
@@ -23,11 +24,12 @@ import hotelServiceDTO.memberDTO;
 @WebServlet("/member")
 public class MemberController extends HttpServlet {
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+//		response.setCharacterEncoding("UTF-8");
+//		response.setContentType("text/html;charset=UTF-8");
+		
 		String command = request.getParameter("command");
 		
 		System.out.println(command);
-
-		
 		if(command == null){
 			command = "hotel";
 		}
@@ -38,18 +40,17 @@ public class MemberController extends HttpServlet {
 			roomList(request, response);
 		}else if(command.equals("bookingForm")){
 			bookingForm(request, response);
+		}else if(command.equals("MyPage")) {
+			mypage(request, response);
+		}else if(command.equals("정보수정")) {
+			modify(request, response);
+		}else if(command.equals("update")) {
+			update(request, response);
+		}else if(command.equals("회원탈퇴")) {
+			deleteMember(request, response);
 		}
 		
-		HttpSession memberSession = request.getSession();
 		
-		String memberId = (String)memberSession.getAttribute("memberId");
-		
-		try {
-			memberDTO member = new memberDAO().selectMember(memberId);
-			System.out.println(member);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
 		
 	}
 		
@@ -69,7 +70,6 @@ public class MemberController extends HttpServlet {
 	private void roomList(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String url = "error.jsp";
 		String hotelNum=request.getParameter("hotelNum");
-		System.out.println(hotelNum);
 		try {
 			request.setAttribute("room", roomDAO.getRoomContents(Integer.parseInt(hotelNum)));
 			url = "roomList.jsp";
@@ -116,7 +116,81 @@ public class MemberController extends HttpServlet {
 		
 		request.getRequestDispatcher(url).forward(request, response);
 		
+	}
+	
+	private void mypage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession memberSession = request.getSession();
 		
+		String memberId = (String)memberSession.getAttribute("memberId");
+		
+		try {
+			memberDTO member = new memberDAO().selectMember(memberId);
+			request.setAttribute("member", member);
+			System.out.println(member);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		request.getRequestDispatcher("MyPage.jsp").forward(request, response);
 	}
 
+	private void modify(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String id = request.getParameter("id");
+		String name = request.getParameter("name");
+		String tel = request.getParameter("tel");
+		String email = request.getParameter("email");
+		String grade = request.getParameter("grade");
+
+		memberDTO member = new memberDTO(id, name, tel, email, Integer.parseInt(grade));
+		System.out.println(member);
+		request.setAttribute("member", member);
+		
+		request.getRequestDispatcher("modify.jsp").forward(request, response);
+	}
+	
+	private void update(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+		String id = request.getParameter("id");
+		String name = request.getParameter("name");
+		String tel = request.getParameter("tel");
+		String email = request.getParameter("email");
+		memberDTO member = new memberDTO();
+		boolean result = true;
+		
+		try {
+			result = memberDAO.updateInfo(name, tel, email, id);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		if(result) {
+			try {
+				member = memberDAO.selectMember(id);
+				request.setAttribute("member", member);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			request.getRequestDispatcher("MyPage.jsp").forward(request, response);
+		}
+	}
+	
+	private void deleteMember(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		String id = request.getParameter("id");
+		
+		HttpSession session = request.getSession(false);
+		System.out.println("meberSession : " + session.getAttribute("memberId"));
+		System.out.println("adminSession : " + session.getAttribute("adminId"));
+		session.invalidate();
+		
+		boolean result = true;
+		
+		try {
+			result = memberDAO.deleteMember(id);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		if(result) {
+			response.sendRedirect("index.html");
+		}
+		
+	}
 }

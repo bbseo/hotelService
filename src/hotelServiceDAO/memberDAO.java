@@ -165,4 +165,56 @@ public class memberDAO {
 			
 		return member;
 	}
+	
+	public static boolean updateInfo(String name, String tel, String email, String id) throws SQLException {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		boolean result = false;
+		
+		String sql = "update member set member_name=?, tel=?, email=? where member_id=?";
+		
+		try {
+			con = DBUtil.getConnection();
+			pstmt = con.prepareCall(sql);
+			
+			pstmt.setString(1, name);
+			pstmt.setString(2, tel);
+			pstmt.setString(3, email);
+			pstmt.setString(4, id);
+			
+			int count = pstmt.executeUpdate();
+			
+			if(count != 0) {
+				result = true;
+			}
+			
+		} finally {
+			DBUtil.close(con, pstmt);
+		}
+		return result;
+	}
+	
+	public static boolean deleteMember(String id) throws SQLException {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		boolean result = false;
+		
+		String sql = "delete from member where member_id=?";
+		
+		try {
+			con = DBUtil.getConnection();
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setString(1, id);
+			
+			int count = pstmt.executeUpdate();
+			
+			if(count != 0) {
+				result = true;
+			}
+		}finally {
+			DBUtil.close(con, pstmt);
+		}
+		return result;
+	}
 }

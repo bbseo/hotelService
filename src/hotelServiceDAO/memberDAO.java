@@ -138,4 +138,31 @@ public class memberDAO {
 		}
 		return result;
 	}
+	
+	public static memberDTO selectMember(String id) throws SQLException {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		memberDTO member = null;
+		
+		String sql="select * from member where member_id=?";
+		
+		try {
+			con = DBUtil.getConnection();
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setString(1, id);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				member = new memberDTO(rset.getInt(1), rset.getString(2), rset.getString(3), rset.getString(4),
+						rset.getString(5), rset.getString(6), rset.getInt(7), rset.getString(8));
+			}
+			}finally {
+				DBUtil.close(con, pstmt, rset);
+			}
+			
+		return member;
+	}
 }

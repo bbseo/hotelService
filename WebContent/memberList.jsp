@@ -9,8 +9,12 @@
 <title>memberList.jsp</title>
 <style type="text/css">
 	.member_search_wrapper {width: 1280px; margin: 0 auto; }
-	.member_search {text-align: right;}
-	.add_admin {font-family: 'Dongle', sans-serif; font-size: 1.5rem; background: #F8EDE3; border-radius: 5px; cursor: pointer;}
+	.member_search {text-align: right; }
+	.search_flex {display:flex; justify-content: flex-end; margin-bottom: 10px;}
+	.add_admin {font-family: 'Dongle', sans-serif; font-size: 1.5rem; background: #F8EDE3; border-radius: 0.5rem; cursor: pointer; border-width: 1px;}
+	.search_btn {font-family: 'Dongle', sans-serif; font-size: 1.5rem; background: #F8EDE3; border-radius: 0.5rem; cursor: pointer; border-width: 1px; margin-left: 1rem;}
+	.search_text{width: 10rem;  border:0; border-bottom: 1px solid #333; margin-left: 1rem; outline: 0;}
+	td {border-radius: 0.5rem;}
 </style>
 </head>
 <body>
@@ -21,14 +25,16 @@
 		
 	<div class="member_search">
 		<form name="search_member_list" method="post" action="admin">
+		    <div class="search_flex">
 		    <input type="hidden" name="command" value="memberList">
 		       <select id="se" name="se">
 		          <option value="all">모두</option>
 		          <option value="member">사용자</option>
 		          <option value="admin">관리자</option>
 		       </select>
-				<input type=text name="name" size="50">
-		   		<input type="submit" value="검색">
+				<input class="search_text" type=text name="name" size="50" placeholder="이름검색">
+		   		<input class="search_btn" type="submit" value="검색">
+		    </div>
 		</form>
 	</div>
 	

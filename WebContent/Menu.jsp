@@ -8,18 +8,6 @@
 <meta charset="utf-8">
 <title>Header</title>
 <link href="./Menu.css" rel="stylesheet" type="text/css">
-<style type="text/css">
-	nav {width: 100%}
-	a {text-decoration: none; color: #000;}
-	.menu_content{display: flex; justify-content: space-around; width: 100%; list-style: none;}
-</style>
-<%--
-<ul class="menu_content>
-			<li><a href="admin?command=memberList">사용자관리</a></li>
-			<li><a href="admin?command=bookingList">예약관리</a></li>
-			<li><a href="admin?command=hotelList">호텔관리</a></li>
-		</ul> --%>
-		
 </head>
 <body>
 	<nav>

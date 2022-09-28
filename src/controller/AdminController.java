@@ -27,7 +27,7 @@ public class AdminController extends HttpServlet {
 		if (command == null) {
 			command = "memberList";
 		}
-//		asdfds
+//		asdfdsfasdf
 		if (command.equals("memberList")) {
 			memberList(request, response);
 		} else if(command.equals("addAdmin")) {

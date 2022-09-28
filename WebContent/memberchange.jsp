@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-	pageEncoding="utf-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
@@ -26,9 +26,7 @@ function sendDelete(){
 </script>
 </head>
 <body>
-	<form name="requestForm" method=post action="adm.
-	
-	in">
+	<form name="requestForm" method=post action="admin">
 		<table align="center" cellpadding="5" cellspacing="1" width="600" border="1">
 			<tr>
 				<td width="1220" height="20" colspan="2" bgcolor="#336699">

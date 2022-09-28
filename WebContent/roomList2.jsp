@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
@@ -54,7 +54,7 @@
 	<c:forEach items="${requestScope.roomList}" var="data">
 		    <tr>
 		        <td bgcolor="">
-		            <p align="center"><span style="font-size:9pt;">${data.hotelnum}</span></p>
+		            <p align="center"><span style="font-size:9pt;">${data.hotelNum}</span></p>
 		        </td>
 		        <td bgcolor="">
 		            <p align="center"><span style="font-size:9pt;">${data.roomName}</span></p>
@@ -88,9 +88,8 @@
 		        </td>
 		    </tr>
 	</c:forEach>
-	3
 </table>
 <hr>
-<div align=right><span style="font-size:9pt;">&lt;<a href="addRoom.jsp?num=${requestScope.roomList[0].hotelnum}">방 추가</a>&gt;</span></div>
+<div align=right><span style="font-size:9pt;">&lt;<a href="addRoom.jsp?num=${requestScope.roomList[0].hotelNum}">방 추가</a>&gt;</span></div>
 </body>
 </html>

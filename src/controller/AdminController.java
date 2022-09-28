@@ -1,4 +1,4 @@
-package controller;
+ package controller;
 
 import java.io.IOException;
 import java.sql.Date;
@@ -26,9 +26,7 @@ public class AdminController extends HttpServlet {
 		String command = request.getParameter("command");
 		if (command == null) {
 			command = "memberList";
-		}
-//		asdfdsfasdf
-		if (command.equals("memberList")) {
+		} if (command.equals("memberList")) {
 			memberList(request, response);
 		} else if(command.equals("addAdmin")) {
 			addAdmin(request, response);

@@ -24,21 +24,11 @@ import hotelServiceDTO.memberDTO;
 @WebServlet("/member")
 public class MemberController extends HttpServlet {
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		response.setCharacterEncoding("UTF-8");
-//		response.setContentType("text/html;charset=UTF-8");
-		
 		String command = request.getParameter("command");
 		
 		System.out.println(command);
-		if(command == null){
-			command = "hotel";
-		}
 		
-		if(command.equals("hotel")){
-			hotelList(request, response);
-		}else if(command.equals("room")){
-			roomList(request, response);
-		}else if(command.equals("bookingForm")){
+		if(command.equals("bookingForm")){
 			bookingForm(request, response);
 		}else if(command.equals("MyPage")) {
 			mypage(request, response);
@@ -54,32 +44,32 @@ public class MemberController extends HttpServlet {
 		
 	}
 		
-	private void hotelList(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String url = "error.jsp";
-		try {
-			request.setAttribute("hotel", hotelDAO.getAllContents());
-			url = "list.jsp";
-		} catch (SQLException e) {
-			e.printStackTrace();
-			request.setAttribute("error", "紐⑤몢 蹂닿린 �떎�뙣 �옱 �떎�뻾 �빐 二쇱꽭�슂");
-		}
-		request.getRequestDispatcher(url).forward(request, response);
-		
-	}
-
-	private void roomList(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String url = "error.jsp";
-		String hotelNum=request.getParameter("hotelNum");
-		try {
-			request.setAttribute("room", roomDAO.getRoomContents(Integer.parseInt(hotelNum)));
-			url = "roomList.jsp";
-		} catch (SQLException e) {
-			e.printStackTrace();
-			request.setAttribute("error", "紐⑤몢 蹂닿린 �떎�뙣 �옱 �떎�뻾 �빐 二쇱꽭�슂");
-		}
-		request.getRequestDispatcher(url).forward(request, response);
-		
-	}
+//	private void hotelList(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+//		String url = "error.jsp";
+//		try {
+//			request.setAttribute("hotel", hotelDAO.getAllContents());
+//			url = "list.jsp";
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//			request.setAttribute("error", "紐⑤몢 蹂닿린 �떎�뙣 �옱 �떎�뻾 �빐 二쇱꽭�슂");
+//		}
+//		request.getRequestDispatcher(url).forward(request, response);
+//		
+//	}
+//
+//	private void roomList(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+//		String url = "error.jsp";
+//		String hotelNum=request.getParameter("hotelNum");
+//		try {
+//			request.setAttribute("room", roomDAO.getRoomContents(Integer.parseInt(hotelNum)));
+//			url = "roomList.jsp";
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//			request.setAttribute("error", "紐⑤몢 蹂닿린 �떎�뙣 �옱 �떎�뻾 �빐 二쇱꽭�슂");
+//		}
+//		request.getRequestDispatcher(url).forward(request, response);
+//		
+//	}
 	
 	private void bookingForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String url = "error.jsp";
@@ -125,7 +115,7 @@ public class MemberController extends HttpServlet {
 		
 		try {
 			memberDTO member = new memberDAO().selectMember(memberId);
-			request.setAttribute("member", member);
+			memberSession.setAttribute("member", member);
 			System.out.println(member);
 		} catch (SQLException e) {
 			e.printStackTrace();

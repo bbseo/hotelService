@@ -43,7 +43,7 @@
 		    <tr>
 		        <td bgcolor="">
 		            <p align="center"><span style="font-size:9pt;">
-		            <img alt="" src="${hotel.hotelImagePath}" onclick="location.href='member?command=room&hotelNum=${hotel.hotelNum}'"></span></p>
+		            <img alt="" src="${hotel.hotelImagePath}" onclick="location.href='hotel?command=room&hotelNum=${hotel.hotelNum}'"></span></p>
 		        </td>
 		        <%-- <td bgcolor="">
 					<p align="center"><span style="font-size:9pt;">

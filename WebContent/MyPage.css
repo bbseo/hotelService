@@ -20,6 +20,7 @@ body {
 	font-weight: bold;
 	text-align: center;
 	font-family: 'Dongle', sans-serif;
+	cursor: pointer;
 }
 
 #header_hotel {
@@ -33,6 +34,12 @@ body {
 	font-family: 'Dongle', sans-serif;
 }
 
+.logout_form {
+	display: inline-block;
+	position: absolute;
+	right: 0;
+}
+
 #logOut {
 	height: 3.5rem;
 	margin: 0;
@@ -43,6 +50,9 @@ body {
 	font-weight: bold;
 	color: #BE8C63;
 	font-family: 'Dongle', sans-serif;
+	border:none;
+	background-color: #F8EDE3;
+	cursor: pointer;
 }
 
 .title {

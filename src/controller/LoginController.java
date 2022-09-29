@@ -25,7 +25,7 @@ public class LoginController extends HttpServlet {
 		System.out.println(command);
 		
 		if(command == null) {
-			
+			command = "login";
 		}
 		
 		if(command.equals("login")) {
@@ -65,14 +65,14 @@ public class LoginController extends HttpServlet {
 		else if(result == "Member") {
 			memberSession.setAttribute("memberId", id);
 			System.out.println(memberSession.getAttribute("memberId"));
-			response.sendRedirect("index.html");
+//			response.sendRedirect("index.html");
+			response.sendRedirect("hotel?command=hotel");
+			return;
 		}
 		else {
 			PrintWriter out = response.getWriter();
 			
-			out.println("<script language='javascript'>");
-			out.println("alert('알림창')");
-			out.println("</script>");
+			out.println("<script>alert('아이디가 존재하지 않거나 비밀번호가 일치하지 않습니다.'); location.href='http://localhost:8080/step10_TeamProject/Login.jsp';</script>");
 
 			out.flush();
 		}
@@ -136,12 +136,14 @@ public class LoginController extends HttpServlet {
 		response.addHeader("result", String.valueOf(result));
 	}
 	
-	public void logOut(HttpServletResponse response, HttpServletRequest request) throws IOException {
+	public void logOut(HttpServletResponse response, HttpServletRequest request) throws IOException, ServletException {
 		HttpSession session = request.getSession(false);
 		System.out.println("meberSession : " + session.getAttribute("memberId"));
 		System.out.println("adminSession : " + session.getAttribute("adminId"));
 		session.invalidate();
-		response.sendRedirect("index.html");
+		response.sendRedirect("hotel?command=hotel");
+		return;
+//		request.getRequestDispatcher("index.html").forward(request, response);
 	}
 
 }

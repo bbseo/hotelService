@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" %>
+<%@ page import="hotelServiceDTO.memberDTO" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,11 +12,19 @@
 <title>Insert title here</title>
 </head>
 <body>
+<%-- 	<% HttpSession session = request.getSession();
+		response.getWriter().print(session.getAttribute("member"));
+		memberDTO member = (memberDTO)session.getAttribute("member");
+		session.setAttribute("test", member);
+	%> --%>
+	
 	<header class="main_header">
 		<div class="header_content">
-			<p id="header_title">야 여기어때?</p>
-			<p id="header_hotel">🏨 Hotel</p>	
-			<p id="logOut">로그아웃</p>	
+			<p id="header_title" onclick="location.href='index.html'">야 여기어때?</p>
+			<p id="header_hotel">🏨 Hotel</p>
+			<form class="logout_form" action="login" method="post">
+				<input id="logOut" type="submit" name="command" value="Log Out">
+			</form>	
 		</div>
 	</header>
 	

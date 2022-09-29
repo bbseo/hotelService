@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 import hotelServiceDTO.bookingListDTO;
+import hotelServiceDTO.hotelDTO;
 import hotelServiceDTO.memberDTO;
 import hotelServiceDTO.roomDTO;
 import util.DBUtil;
@@ -29,8 +30,8 @@ public class bookingDAO {
 			rset = pstmt.executeQuery();
 			alist = new ArrayList<bookingListDTO>();
 			while (rset.next()) {
-				alist.add(new bookingListDTO(rset.getInt(1), rset.getInt(2), rset.getInt(3), rset.getDate(4),
-						rset.getDate(5), rset.getDate(6), rset.getDate(7), rset.getString(8)));
+//				alist.add(new bookingListDTO(rset.getInt(1), rset.getInt(2), rset.getInt(3), rset.getDate(4),
+//						rset.getDate(5), rset.getDate(6), rset.getDate(7), rset.getString(8)));
 			}
 		} finally {
 			DBUtil.close(con, pstmt, rset);
@@ -52,9 +53,9 @@ public class bookingDAO {
 			rset = pstmt.executeQuery();
 			
 			if(rset.next()){
-				am = new bookingListDTO(rset.getInt(1),rset.getInt(2),
-						rset.getInt(3),rset.getDate(4),rset.getDate(5),
-						rset.getDate(6),rset.getDate(7), rset.getString(8));
+//				am = new bookingListDTO(rset.getInt(1),rset.getInt(2),
+//						rset.getInt(3),rset.getDate(4),rset.getDate(5),
+//						rset.getDate(6),rset.getDate(7), rset.getString(8));
 			}
 		}finally{
 			DBUtil.close(con, pstmt);
@@ -101,7 +102,7 @@ public class bookingDAO {
 			alist = new ArrayList<roomDTO>();
 			while (rset.next()) {
 				alist.add(new roomDTO(rset.getInt(1), rset.getInt(2), rset.getString(3), rset.getString(4),
-						rset.getString(5), rset.getInt(6), rset.getInt(7),rset.getInt(8),rset.getString(9)));
+						rset.getString(5), rset.getInt(6), rset.getInt(7),rset.getString(8)));
 			}
 			System.out.println("room"+alist);
 		} finally {
@@ -123,33 +124,102 @@ public class bookingDAO {
 		               +"from room as r left join bookinglist as b on r.room_num=b.room_num "
 		               +"where not( ? <= checkin_date or checkout_date <= ?))";
 
-		      con = DBUtil.getConnection();
-		      pstmt = con.prepareStatement(sql);
-		      pstmt.setString(1, category);
-		      pstmt.setInt(2, hotelNum);
-		      pstmt.setString(3, checkOut);
-		      pstmt.setString(4, checkIn);
-		      rset = pstmt.executeQuery();
-		      while(rset.next()) {
-		         Map<String, String> hm = new HashMap<>();
-		         hm.put("roomName",rset.getString("room_name"));
-		         hm.put("maxGuestNum", Integer.toString(rset.getInt("max_guest_num")));
-		         hm.put("price", Integer.toString(rset.getInt("price")));
-		         hm.put("category",rset.getString("category"));
-		         hm.put("checkIn",checkIn);
-		         hm.put("checkOut",checkOut);
-		         hm.put("roomNum", Integer.toString(rset.getInt("room_num")));
-		         hm.put("hotelNum", Integer.toString(rset.getInt("hotel_num")));
-//		         hm.put("hotelName", rset.getString("hotel_name"));
-//		         hm.put("roomName", rset.getString("room_name"));
-//		         hm.put("maxGuestNum", Integer.toString(rset.getInt("max_guest_num")));
-//		         hm.put("price", Integer.toString(rset.getInt("price")));
-//		         hm.put("roomState", rset.getString("room_state"));
-		         list.add(hm);
-		      }
+		      try {
+			      con = DBUtil.getConnection();
+			      pstmt = con.prepareStatement(sql);
+			      pstmt.setString(1, category);
+			      pstmt.setInt(2, hotelNum);
+			      pstmt.setString(3, checkOut);
+			      pstmt.setString(4, checkIn);
+			      rset = pstmt.executeQuery();
+			      
+			      
+			      while(rset.next()) {
+			    	 Map<String, String> hm = new HashMap<>();
+			    	 System.out.println(rset.getFetchSize()); 
+			         hm.put("roomName",rset.getString("room_name"));
+			         hm.put("maxGuestNum", Integer.toString(rset.getInt("max_guest_num")));
+			         hm.put("price", Integer.toString(rset.getInt("price")));
+			         hm.put("category",rset.getString("category"));
+			         hm.put("checkIn",checkIn);
+			         hm.put("checkOut",checkOut);
+			         hm.put("roomNum", Integer.toString(rset.getInt("room_num")));
+			         hm.put("hotelNum", Integer.toString(rset.getInt("hotel_num")));
+			         list.add(hm);
+			      	}
+		      } finally {
+					DBUtil.close(con, pstmt, rset);
+			}
 		      System.out.println(list);
 		      return list;
 		   }
-	
+	   
+	   public  static boolean booking(bookingListDTO booking) throws SQLException{
+			Connection con = null;	
+			PreparedStatement pstmt = null;
+			boolean result = false;
+			
+			try {
+				con = DBUtil.getConnection();
+			
+				pstmt = con.prepareStatement("insert into bookinglist(member_num, room_num,guest_num,checkin_date, checkout_date) values(?, ?, ?, ?, ?)");
+				pstmt.setInt(1, booking.getMemberNum());
+				pstmt.setInt(2,booking.getRoomNum());
+				pstmt.setInt(3,booking.getGuestNum());
+			    pstmt.setString(4, booking.getCheckin_date());
+			    pstmt.setString(5, booking.getCheckout_date());
+				int count = pstmt.executeUpdate();
+				
+				if(count != 0){
+					result = true;
+				}
+			}finally{
+				DBUtil.close(con, pstmt);
+			}
+			return result;
+		}
+
+
+	public static List<Object> bookingComplete(String memberId) throws SQLException {
+	      System.out.println("bookingComplete DAO : "+memberId);
+	      
+	      Connection con = null;
+	      PreparedStatement pstmt = null;
+	      ResultSet rset = null;
+	      List<Object> list = new ArrayList<>();
+	      String sql = "select member_name, tel, checkin_date, checkout_date, booked_date, max_guest_num, guest_num, category, price, room_name, hotel_grade, hotel_location, hotel_name " + 
+	      			   "from hotel as h left join room as r on h.hotel_num=r.hotel_num left join bookinglist as b on r.room_num = b.room_num left join member as m on b.member_num = m.member_num " + 
+	      			   "where booking_num in (select max(booking_num) " + 
+	      			   "from bookinglist " + 
+	      			   "where member_id = ?)";
+
+	      try {
+		      con = DBUtil.getConnection();
+		      pstmt = con.prepareStatement(sql);
+		      pstmt.setString(1, memberId);
+		      rset = pstmt.executeQuery();
+		      while(rset.next()) {
+		    	 Map<String, String> hm = new HashMap<>();
+		         hm.put("memberName",rset.getString("member_name"));
+		         hm.put("tel",rset.getString("tel"));
+		         hm.put("checkinDate",rset.getString("checkin_date"));
+		         hm.put("checkoutDate",rset.getString("checkout_date"));
+		         hm.put("bookedDate",rset.getString("booked_date"));
+		         hm.put("maxGuestNum", Integer.toString(rset.getInt("max_guest_num")));
+		         hm.put("guestNum", Integer.toString(rset.getInt("guest_num")));
+		         hm.put("category",rset.getString("category"));
+		         hm.put("price", Integer.toString(rset.getInt("price")));
+		         hm.put("roomName",rset.getString("room_name"));
+		         hm.put("hotelGrade", Integer.toString(rset.getInt("hotel_grade")));
+		         hm.put("hotelLocation",rset.getString("hotel_location"));
+		         hm.put("hotelName",rset.getString("hotel_name"));
+		         list.add(hm);
+		      	}
+	      } finally {
+				DBUtil.close(con, pstmt, rset);
+		}
+	      System.out.println(list);
+	      return list;
+	   }
 	
 }

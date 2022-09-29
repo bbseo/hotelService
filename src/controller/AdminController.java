@@ -458,8 +458,7 @@ public class AdminController extends HttpServlet {
 	private void roomUpdate(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String roomnum=request.getParameter("num");
 		String roomName=request.getParameter("roomName");
-		String roomImage=request.getParameter("roomImage");
-		String guestNum=request.getParameter("guestNum");				
+		String roomImage=request.getParameter("roomImage");				
 		String maxGuestNum=request.getParameter("maxGuestNum");				
 		String price=request.getParameter("price");				
 		String category=request.getParameter("category");
@@ -467,7 +466,6 @@ public class AdminController extends HttpServlet {
 		if(roomName == null || roomName.trim().length() == 0 ||
 			roomImage == null || roomImage.trim().length() == 0 ||
 			roomnum == null || roomnum.trim().length() == 0 ||
-			guestNum == null || guestNum.trim().length() == 0 ||
 			maxGuestNum == null || maxGuestNum.trim().length() == 0 ||
 			price == null || price.trim().length() == 0 ||
 			category == null || category.trim().length() == 0 ){
@@ -478,7 +476,7 @@ public class AdminController extends HttpServlet {
 		boolean result = false;
 		
 		try {
-			result = roomDAO.updateContent(new roomDTO(Integer.parseInt(roomnum),roomName,roomImage,Integer.parseInt(guestNum),Integer.parseInt(maxGuestNum),Integer.parseInt(price),category));
+			result = roomDAO.updateContent(new roomDTO(Integer.parseInt(roomnum),roomName,roomImage,Integer.parseInt(maxGuestNum),Integer.parseInt(price),category));
 		} catch (SQLException e) {
 			e.printStackTrace();
 			request.setAttribute("error", "게시글 수정 실패");

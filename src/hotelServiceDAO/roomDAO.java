@@ -27,7 +27,7 @@ public class roomDAO {
 			alist = new ArrayList<roomDTO>();
 			while (rset.next()) {
 				alist.add(new roomDTO(rset.getInt(1), rset.getInt(2), rset.getString(3), rset.getString(4),
-						rset.getString(5), rset.getInt(6), rset.getInt(7), rset.getInt(8), rset.getString(9)));
+						rset.getString(5), rset.getInt(6), rset.getInt(7), rset.getString(8)));
 			}
 
 		} finally {
@@ -50,7 +50,7 @@ public class roomDAO {
 			alist = new ArrayList<roomDTO>();
 			while (rset.next()) {
 				alist.add(new roomDTO(rset.getInt(1), rset.getInt(2), rset.getString(3), rset.getString(4),
-						rset.getString(5), rset.getInt(6), rset.getInt(7), rset.getInt(8), rset.getString(9)));
+						rset.getString(5), rset.getInt(6), rset.getInt(7), rset.getString(8)));
 			}
 		} finally {
 			DBUtil.close(con, pstmt, rset);
@@ -98,7 +98,7 @@ public class roomDAO {
 			
 			if(rset.next()){
 				am = new roomDTO(rset.getInt(1),rset.getInt(2), rset.getString(3),
-						rset.getString(4),rset.getString(5),rset.getInt(6),rset.getInt(7),rset.getInt(8),rset.getString(9));
+						rset.getString(4),rset.getString(5),rset.getInt(6),rset.getInt(7),rset.getString(8));
 			}
 		}finally{
 			DBUtil.close(con, pstmt);
@@ -114,14 +114,13 @@ public class roomDAO {
 		try {
 			con = DBUtil.getConnection();
 		
-			pstmt = con.prepareStatement("update room set room_name=?, room_image_path=? , guest_num=? , max_guest_num=? , price=? , category=? where room_num=?");
+			pstmt = con.prepareStatement("update room set room_name=?, room_image_path=? , max_guest_num=? , price=? , category=? where room_num=?");
 			pstmt.setString(1, am.getRoomName());
 			pstmt.setString(2,am.getRoomImage());
-			pstmt.setInt(3, am.getGuestNum());
-		    pstmt.setInt(4, am.getMaxGuestNum());
-		    pstmt.setInt(5, am.getPrice());
-		    pstmt.setString(6, am.getCategory());
-		    pstmt.setInt(7, am.getRoomNum());
+		    pstmt.setInt(3, am.getMaxGuestNum());
+		    pstmt.setInt(4, am.getPrice());
+		    pstmt.setString(5, am.getCategory());
+		    pstmt.setInt(6, am.getRoomNum());
 		    
 
 			int count = pstmt.executeUpdate();

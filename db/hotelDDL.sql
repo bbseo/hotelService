@@ -29,6 +29,7 @@ create table bookinglist (
 	booking_num int primary key auto_increment,
 	member_num int not null,
 	room_num int not null,
+	guest_num int default 2,
 	checkin_date date not null,
     checkout_date date not null,
     booked_date timestamp not null default now(),
@@ -41,7 +42,6 @@ create table room (
 	room_name varchar(100) not null,
 	room_image_path varchar(255) not null,
     room_state varchar(5) default "empty",
-	guest_num int default 2,
     max_guest_num int default 4,
 	price int not null,
 	category varchar(20) not null

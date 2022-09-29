@@ -11,6 +11,8 @@
 </head>
 <body>
 <%@include file ="./Header.jsp" %>
+
+
 <form action="member" name="command" method="post">
 <table align="center" border="0" cellpadding="5" cellspacing="2" width="100%" bordercolordark="white" bordercolorlight="black">
 
@@ -22,10 +24,11 @@
           <article>
               <div>
                  <p>
-                    <input type="radio" name="sensorDa" value="${bookingForm.roomName}">${bookingForm.roomName}
+                    <input type="radio" name="radio" value="${bookingForm.roomName}">${bookingForm.roomName}
                     <input type="hidden" name="category" value="${bookingForm.category}">
-                       <input type="hidden" name="hotelNum" value="${bookingForm.hotelNum }">
-                       <input type="hidden" name="roomNum" value="${bookingForm.roomNum }">
+                    <input type="hidden" name="roomNum" value="${bookingForm.roomNum }">
+                    <input type="hidden" name="checkIn" value="${bookingForm.checkIn }">
+                    <input type="hidden" name="checkOut" value="${bookingForm.checkOut }">
                  </p>
               </div>
 
@@ -39,7 +42,7 @@
    </select>
    
    <div>
-              <input type="hidden" name="command" value="hotel">
+              <input type="hidden" name="command" value="booking">
          <input type="submit" value="예약하기">
    </div>
 </table>

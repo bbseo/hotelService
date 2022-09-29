@@ -13,7 +13,6 @@ public class roomDTO {
 	private String roomName;
 	private String roomImage;
 	private String roomState;
-	private int guestNum;
 	private int maxGuestNum;
 	private int price;
 	private String category;
@@ -27,13 +26,6 @@ public class roomDTO {
 		this.category=category;
 	}
 
-	public roomDTO(int roomnum, String roomName, String roomImage, int guestNum, int maxGuestNum, int price, String category) {
-		this.roomNum=roomnum;
-		this.roomName=roomName;
-		this.roomImage=roomImage;
-		this.guestNum=guestNum;
-		this.maxGuestNum=maxGuestNum;
-		this.price=price;
-		this.category=category;
-	}
+
+
 }

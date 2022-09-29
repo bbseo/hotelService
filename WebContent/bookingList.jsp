@@ -6,36 +6,44 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link href="./listAll.css" rel="stylesheet" type="text/css">
 <title>bookingList.jsp</title>
 </head>
 <body>
 <%@ include file="./Header.jsp" %>
+<div class="search_wrapper">
 <%@ include file="./Menu.jsp" %>
+<div class="member_search">
+               <form name="search_member_list" method="post" action="admin">
+                <div class="search_flex">
+               <input type="hidden" name="command" value="bookingList">
+                  <input class="search_text" type=text name="name" size="50" placeholder="이름입력"></span></b></td>
+                  	<input class="search_btn" type="submit" value="검색">
+               </form>
+               </div>
+            
 <table align="center" border="0" cellpadding="5" cellspacing="2" width="100%" bordercolordark="white" bordercolorlight="black">
-	<tr>
-        <td bgcolor="#336699">
-            <p align="center"><font color="white"><b><span style="font-size:9pt;">예약 코드</span></b></font></p>
+	<tr class="table_title">
+        <td>
+            <p align="center"><b><span style="font-size:9pt;">예약 코드</span></b></font></p>
         </td>
-        <td bgcolor="#336699">
-            <p align="center"><font color="white"><b><span style="font-size:9pt;">멤버이름</span></b></font></p>
+        <td >
+            <p align="center"><b><span style="font-size:9pt;">멤버이름</span></b></font></p>
         </td>
-        <td bgcolor="#336699">
-            <p align="center"><font color="white"><b><span style="font-size:9pt;">방 코드</span></b></font></p>
+   <td >
+            <p align="center"><b><span style="font-size:9pt;">방 코드</span></b></font></p>
         </td>
-        <td bgcolor="#336699">
-            <p align="center"><font color="white"><b><span style="font-size:9pt;">체크인 날짜</span></b></font></p>
+       <td>
+            <p align="center"><b><span style="font-size:9pt;">체크인 날짜</span></b></font></p>
         </td>
-        <td bgcolor="#336699">
-            <p align="center"><font color="white"><b><span style="font-size:9pt;">체크아웃 날짜</span></b></font></p>
+        <td>
+            <p align="center"><b><span style="font-size:9pt;">체크아웃 날짜</span></b></font></p>
         </td>
-        <td bgcolor="#336699">
-            <p align="center"><font color="white"><b><span style="font-size:9pt;">예약신청날짜</span></b></font></p>
+        <td>
+            <p align="center"><b><span style="font-size:9pt;">예약신청날짜</span></b></font></p>
         </td>
-        <td bgcolor="#336699">
-            <p align="center"><font color="white"><b><span style="font-size:9pt;">예약취소날짜</span></b></font></p>
-        </td>
-        <td bgcolor="#336699">
-            <p align="center"><font color="white"><b><span style="font-size:9pt;">수정하기</span></b></font></p>
+       <td>
+            <p align="center"><b><span style="font-size:9pt;">예약취소날짜</span></b></font></p>
         </td>
     </tr>
     
@@ -55,7 +63,7 @@
 		            ${data.bookingNum}</span></p>
 		        </td>
 		        <td bgcolor="">
-		            <p align="center"><span style="font-size:9pt;">${data.memberName}</span></p>
+		            <p align="center"><span style="font-size:9pt;">${data.member_name}</span></p>
 		        </td>
 		        <td bgcolor="">
 		            <p align="center"><span style="font-size:9pt;">${data.roomNum}</span></p>
@@ -75,13 +83,11 @@
 		            <p align="center"><span style="font-size:9pt;">
 		             ${data.booked_cancel_date}</span></p>
 		        </td>
-		        <td bgcolor="">
-		            <p align="center"><span style="font-size:9pt;">
-		            <a href="admin?command=bookingdelete&num=${data.bookingNum}">삭제하기</a></span></p>
-		        </td>
 		    </tr>
 	</c:forEach>
 </table>
 <hr>
+</div>
 </body>
 </html>
+

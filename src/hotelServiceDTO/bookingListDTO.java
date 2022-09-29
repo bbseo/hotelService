@@ -13,9 +13,19 @@ public class bookingListDTO {
 	private int bookingNum;
 	private int memberNum;
 	private int roomNum;
-	private Date checkin_date;
-	private Date checkout_date;
+	private int guestNum;
+	private String checkin_date;
+	private String checkout_date;
 	private Date booked_date;
 	private Date booked_cancel_date;
-	private String memberName;
+	private String member_name;
+	
+	
+	public bookingListDTO(int memberNum ,int roomNum, int guestNum, String checkIn, String checkOut) {
+		this.memberNum = memberNum;
+		this.roomNum = roomNum;
+		this.guestNum = guestNum;
+		this.checkin_date = checkIn;
+		this.checkout_date = checkOut;
+	}
 }

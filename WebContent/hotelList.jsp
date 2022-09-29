@@ -5,31 +5,45 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link href="./listAll.css" rel="stylesheet" type="text/css">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>bookingList.jsp</title>
 </head>
 <body>
 <%@ include file="./Header.jsp" %>
+<div class="search_wrapper">
 <%@ include file="./Menu.jsp" %>
+	
+	<div class="member_search">
+		<form name="search_member_list" method="post" action="admin">
+		    <div class="search_flex">
+		    <input type="hidden" name="command" value="hotelList">
+		 		<input class="search_text" type=text name="name" size="50" placeholder="이름입력"></span></b></td>
+               	<input class="search_text" type=text name="location" size="50" placeholder="지역 입력"></span></b></td>
+		   		<input class="search_btn" type="submit" value="검색">
+		    </div>
+		</form>
+	</div>
+	
 <table align="center" border="0" cellpadding="5" cellspacing="2" width="100%" bordercolordark="white" bordercolorlight="black">
-	<tr>
-        <td bgcolor="#336699">
-            <p align="center"><font color="white"><b><span style="font-size:9pt;">호텔 이름</span></b></font></p>
+	<tr class="table_title">
+         <td>
+            <p align="center" class="text_color"><b><span style="font-size:9pt;">호텔 이름</span></b></font></p>
         </td>
-        <td bgcolor="#336699">
-            <p align="center"><font color="white"><b><span style="font-size:9pt;">호텔 이미지</span></b></font></p>
+         <td>
+            <p align="center" class="text_color"><b><span style="font-size:9pt;">호텔 이미지</span></b></font></p>
         </td>
-        <td bgcolor="#336699">
-            <p align="center"><font color="white"><b><span style="font-size:9pt;">호텔 등급</span></b></font></p>
+        <td>
+            <p align="center" class="text_color"><b><span style="font-size:9pt;">호텔 등급</span></b></font></p>
         </td>
-        <td bgcolor="#336699">
-            <p align="center"><font color="white"><b><span style="font-size:9pt;">호텔위치</span></b></font></p>
+        <td>
+            <p align="center" class="text_color"><b><span style="font-size:9pt;">호텔위치</span></b></font></p>
         </td>
-        <td bgcolor="#336699">
-            <p align="center"><font color="white"><b><span style="font-size:9pt;">평점</span></b></font></p>
+        <td>
+            <p align="center" class="text_color"><b><span style="font-size:9pt;">평점</span></b></font></p>
         </td>
-        <td bgcolor="#336699">
-            <p align="center"><font color="white"><b><span style="font-size:9pt;">수정하기</span></b></font></p>
+         <td>
+            <p align="center" class="text_color"><b><span style="font-size:9pt;">수정하기</span></b></font></p>
         </td>
     </tr>
     
@@ -49,7 +63,7 @@
 		            ${data.hotelName}</span></p>
 		        </td>
 		        <td bgcolor="">
-		            <p align="center"><span style="font-size:9pt;"><img alt="호텔이미지" src="${data.hotelImagePath}"></span></p>
+		            <p align="center"><span style="font-size:9pt;"><img alt="호텔이미지" src="${data.hotelImagePath}" class="img_size"></span></p>
 		        </td>
 		        <td bgcolor="">
 		            <p align="center"><span style="font-size:9pt;">${data.hotelGrade}</span></p>
@@ -69,6 +83,7 @@
 	</c:forEach>
 </table>
 <hr>
-<div align=right><span style="font-size:9pt;">&lt;<a href="addHotel.jsp">호텔 추가</a>&gt;</span></div>
+<div class="right_bot"><button class="add_btn" onclick="location.href='addHotel.jsp'">호텔 추가</button></div>
+</div>
 </body>
 </html>

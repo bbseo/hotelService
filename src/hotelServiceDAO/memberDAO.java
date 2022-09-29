@@ -13,17 +13,41 @@ import util.DBUtil;
 
 
 public class memberDAO {
-	public static ArrayList<memberDTO> getAllContents() throws SQLException {
+	
+	public static ArrayList<memberDTO> getAllContents(String se, String name) throws SQLException {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		ArrayList<memberDTO> alist = null;
 		String sql = "select * from member";
+		if (se.equals("all")) {
+			sql += " where authority is not null";
+		} else {
+			sql += " where authority = ?";
+		}
+		
+		if(name.equals("")) {
+			sql += " and member_name is not null";
+		} else {
+			sql += " and member_name = ?";
+		}
+		
 		try {
 			con = DBUtil.getConnection();
 			pstmt = con.prepareStatement(sql);
+			if(se.equals("all")) {
+				if(!name.equals("")) {
+					pstmt.setString(1, name);																
+				}
+			} else {
+				pstmt.setString(1, se);
+				if(!name.equals("")) {
+					pstmt.setString(2, name);						
+				} 	
+			}
 			rset = pstmt.executeQuery();
 			alist = new ArrayList<memberDTO>();
+			
 			while (rset.next()) {
 				alist.add(new memberDTO(rset.getInt(1), rset.getString(2), rset.getString(3), rset.getString(4),
 						rset.getString(5), rset.getString(6), rset.getInt(7), rset.getString(8)));
@@ -193,7 +217,7 @@ public class memberDAO {
 		}
 		return result;
 	}
-	
+
 	public static boolean deleteMember(String id) throws SQLException {
 		Connection con = null;
 		PreparedStatement pstmt = null;

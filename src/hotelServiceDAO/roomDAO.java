@@ -27,7 +27,7 @@ public class roomDAO {
 			alist = new ArrayList<roomDTO>();
 			while (rset.next()) {
 				alist.add(new roomDTO(rset.getInt(1), rset.getInt(2), rset.getString(3), rset.getString(4),
-						rset.getString(5), rset.getInt(6), rset.getInt(7), rset.getInt(8), rset.getString(9)));
+						rset.getString(5), rset.getInt(6), rset.getInt(7),rset.getString(8)));
 			}
 
 		} finally {
@@ -36,21 +36,43 @@ public class roomDAO {
 		return alist;
 	}
 
-	public static ArrayList<roomDTO> getRoomContents2(int hotelNum) throws SQLException {
+	public static ArrayList<roomDTO> getRoomContents2(int hotelNum,String name, String category) throws SQLException {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		ArrayList<roomDTO> alist = null;
 		String sql = "select * from room where hotel_num=?";
+		
+		if(name.equals("")) {
+			sql += " and room_name is not null";
+		} else {
+			sql += " and room_name = ?";
+		}
+		if(category.equals("all")) {
+			sql += " and category is not null";
+		} else {
+			sql += " and category = ?";
+		}
+		
 		try {
 			con = DBUtil.getConnection();
 			pstmt = con.prepareStatement(sql);
-			pstmt.setInt(1, hotelNum);
+			pstmt.setInt(1, hotelNum);					
+			if(name.equals("")) {
+				if(!category.equals("all")) {
+					pstmt.setString(2, category);					
+				}
+			} else {
+				pstmt.setString(2, name);					
+				if(!category.equals("all")) {
+					pstmt.setString(3, category);					
+				}
+			}
 			rset = pstmt.executeQuery();
 			alist = new ArrayList<roomDTO>();
 			while (rset.next()) {
 				alist.add(new roomDTO(rset.getInt(1), rset.getInt(2), rset.getString(3), rset.getString(4),
-						rset.getString(5), rset.getInt(6), rset.getInt(7), rset.getInt(8), rset.getString(9)));
+						rset.getString(5), rset.getInt(6), rset.getInt(7),rset.getString(8)));
 			}
 		} finally {
 			DBUtil.close(con, pstmt, rset);
@@ -97,8 +119,8 @@ public class roomDAO {
 			rset = pstmt.executeQuery();
 			
 			if(rset.next()){
-				am = new roomDTO(rset.getInt(1),rset.getInt(2), rset.getString(3),
-						rset.getString(4),rset.getString(5),rset.getInt(6),rset.getInt(7),rset.getInt(8),rset.getString(9));
+				am = new roomDTO(rset.getInt(1), rset.getInt(2), rset.getString(3), rset.getString(4),
+						rset.getString(5), rset.getInt(6), rset.getInt(7),rset.getString(8));
 			}
 		}finally{
 			DBUtil.close(con, pstmt);
@@ -111,25 +133,23 @@ public class roomDAO {
 		PreparedStatement pstmt = null;
 		boolean result = false;
 		
+		
 		try {
 			con = DBUtil.getConnection();
 		
-			pstmt = con.prepareStatement("update room set room_name=?, room_image_path=? , guest_num=? , max_guest_num=? , price=? , category=? where room_num=?");
+			pstmt = con.prepareStatement("update room set room_name=?, room_image_path=? , max_guest_num=? , price=? , category=? where room_num=?");
 			pstmt.setString(1, am.getRoomName());
 			pstmt.setString(2,am.getRoomImage());
-			pstmt.setInt(3, am.getGuestNum());
-		    pstmt.setInt(4, am.getMaxGuestNum());
-		    pstmt.setInt(5, am.getPrice());
-		    pstmt.setString(6, am.getCategory());
-		    pstmt.setInt(7, am.getRoomNum());
+		    pstmt.setInt(3, am.getMaxGuestNum());
+		    pstmt.setInt(4, am.getPrice());
+		    pstmt.setString(5, am.getCategory());
+		    pstmt.setInt(6, am.getRoomNum());
 		    
-
 			int count = pstmt.executeUpdate();
 			
 			if(count != 0){
 				result = true;
 			}
-			System.out.println(result);
 		}finally{
 			DBUtil.close(con, pstmt);
 		}

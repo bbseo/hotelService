@@ -30,8 +30,11 @@ public class HotelController extends HttpServlet {
 
 	private void hotelList(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String url = "error.jsp";
+		String name=request.getParameter("name");
+		String location=request.getParameter("location");
+		String grade=request.getParameter("grade");
 		try {
-			request.setAttribute("hotel", hotelDAO.getAllContents());
+			request.setAttribute("hotel", hotelDAO.getAllContents(name, location));
 			url = "list.jsp";
 		} catch (SQLException e) {
 			e.printStackTrace();

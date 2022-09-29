@@ -38,9 +38,7 @@ public class AdminController extends HttpServlet {
 			memberDelete(request, response);
 		} else if(command.equals("bookingList")) {
 			bookingList(request, response);
-		} else if(command.equals("bookingdelete")) {
-			bookingDelete(request, response);
-		} else if(command.equals("hotelList")) {
+		}  else if(command.equals("hotelList")) {
 			hotelList(request, response);
 		} else if(command.equals("addHotel")) {
 			addHotel(request, response);
@@ -63,10 +61,21 @@ public class AdminController extends HttpServlet {
 		} 
 	}
 
+
 	private void memberList(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String name=request.getParameter("name");
+		String se=request.getParameter("se");
+		
+		if (name == null) {
+			name = "";
+		}
+		if(se == null) {
+			se="all";
+		}
+		
 		String url = "error.jsp";
 		try {
-			request.setAttribute("memberList", memberDAO.getAllContents());
+			request.setAttribute("memberList", memberDAO.getAllContents(se,name));
 			request.getParameter("memberList");
 			url = "memberList.jsp";
 		} catch (SQLException e) {
@@ -196,9 +205,14 @@ public class AdminController extends HttpServlet {
 	}
 	
 	private void bookingList(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String name=request.getParameter("name");
+		if (name == null) {
+			name = "";
+		}
+		
 		String url = "error.jsp";
 		try {
-			request.setAttribute("bookingList", bookingDAO.getAllContents());
+			request.setAttribute("bookingList", bookingDAO.getAllContents(name));
 			request.getParameter("bookingList");
 			url = "bookingList.jsp";
 		} catch (SQLException e) {
@@ -209,56 +223,24 @@ public class AdminController extends HttpServlet {
 
 	}
 	
-//	private void bookingChange(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-//		String bookingNum=request.getParameter("num");
-//		if(bookingNum==null || bookingNum.length() == 0){
-//			response.sendRedirect("admin");
-//			return;
-//		}
-//		String url = "error.jsp";
-//		bookingListDTO gContent = null;
-//		try {
-//			gContent = bookingDAO.getContent(Integer.parseInt(bookingNum));
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//			request.setAttribute("error", "게시글 읽기 실패");
-//		}
-//		if(gContent == null){
-//			request.setAttribute("error", "해당 게시글이 존재하지 않습니다");
-//		}else{
-//			request.setAttribute("resultContent", gContent);
-//			url = "bookingchange.jsp";
-//		}
-//		request.getRequestDispatcher(url).forward(request, response);
-//	}
-	
-	private void bookingDelete(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-		String strNum=request.getParameter("num");
-		
-		if(strNum == null || strNum.trim().length() == 0) {
-			response.sendRedirect("admin");
-			return;				
-		}
-		boolean result = false;
-		try {
-			result = bookingDAO.deleteContent(Integer.parseInt(strNum));
-		} catch (SQLException e) {
-			e.printStackTrace();
-			request.setAttribute("error", "해당 게시글 삭제 실패했습니다. 재 시도 하셔요");
-		}
-		if(result){
-			response.sendRedirect("admin");
-			return;
-		}else{
-			request.setAttribute("error", "삭제하려는 게시글이 존재하지 않습니다");
-		}
-		request.getRequestDispatcher("error.jsp").forward(request, response);
-	}
 	
 	private void hotelList(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		String name=request.getParameter("name");
+		String location=request.getParameter("location");
+		String grade=request.getParameter("grade");
+		
+		if (name == null) {
+			name = "";
+		}
+		if(location == null) {
+			location="";
+		}
+
+		
 		String url = "error.jsp";
 		try {
-			request.setAttribute("hotelList", hotelDAO.getAllContents());
+			request.setAttribute("hotelList", hotelDAO.getAllContents(name,location));
 			request.getParameter("hotelList");
 			url = "hotelList.jsp";
 		} catch (SQLException e) {
@@ -381,7 +363,18 @@ public class AdminController extends HttpServlet {
 	}
 	
 	private void roomList(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+		String room_name=request.getParameter("room_name");
+		String category=request.getParameter("category");
 		String hotelNum=request.getParameter("num");
+		
+		if (room_name == null) {
+			room_name = "";
+		}
+		if(category == null) {
+			category="all";
+		}
+		
+		
 		if(hotelNum==null || hotelNum.length() == 0){
 			response.sendRedirect("admin");
 			return;
@@ -389,8 +382,8 @@ public class AdminController extends HttpServlet {
 		String url = "error.jsp";
 		roomDTO gContent = null;
 		try {
-			request.setAttribute("roomList", roomDAO.getRoomContents2(Integer.parseInt(hotelNum)));
-			request.getParameter("roomList");
+			request.setAttribute("test", hotelNum);
+			request.setAttribute("roomList", roomDAO.getRoomContents2(Integer.parseInt(hotelNum),room_name,category));
 			url = "roomList2.jsp";
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -457,17 +450,18 @@ public class AdminController extends HttpServlet {
 	
 	private void roomUpdate(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String roomnum=request.getParameter("num");
+		String hotelnum=request.getParameter("num");		
 		String roomName=request.getParameter("roomName");
 		String roomImage=request.getParameter("roomImage");
-		String guestNum=request.getParameter("guestNum");				
 		String maxGuestNum=request.getParameter("maxGuestNum");				
 		String price=request.getParameter("price");				
 		String category=request.getParameter("category");
+				
+		
 		
 		if(roomName == null || roomName.trim().length() == 0 ||
 			roomImage == null || roomImage.trim().length() == 0 ||
 			roomnum == null || roomnum.trim().length() == 0 ||
-			guestNum == null || guestNum.trim().length() == 0 ||
 			maxGuestNum == null || maxGuestNum.trim().length() == 0 ||
 			price == null || price.trim().length() == 0 ||
 			category == null || category.trim().length() == 0 ){
@@ -478,7 +472,7 @@ public class AdminController extends HttpServlet {
 		boolean result = false;
 		
 		try {
-			result = roomDAO.updateContent(new roomDTO(Integer.parseInt(roomnum),roomName,roomImage,Integer.parseInt(guestNum),Integer.parseInt(maxGuestNum),Integer.parseInt(price),category));
+			result = roomDAO.updateContent(new roomDTO(Integer.parseInt(roomnum),Integer.parseInt(hotelnum),roomName,roomImage,Integer.parseInt(maxGuestNum),Integer.parseInt(price),category));
 		} catch (SQLException e) {
 			e.printStackTrace();
 			request.setAttribute("error", "게시글 수정 실패");

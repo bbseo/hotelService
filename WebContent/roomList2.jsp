@@ -26,9 +26,6 @@
             <p align="center"><font color="white"><b><span style="font-size:9pt;">방상태</span></b></font></p>
         </td>
         <td bgcolor="#336699">
-            <p align="center"><font color="white"><b><span style="font-size:9pt;">손님수</span></b></font></p>
-        </td>
-        <td bgcolor="#336699">
             <p align="center"><font color="white"><b><span style="font-size:9pt;">최대손님수</span></b></font></p>
         </td>
         <td bgcolor="#336699">
@@ -66,10 +63,6 @@
 		        <td bgcolor="">
 		            <p align="center"><span style="font-size:9pt;">${data.roomState}</span></p>
 		        </td>
-		        <td bgcolor="">
-		            <p align="center"><span style="font-size:9pt;">
-		             ${data.guestNum}</span></p>
-		        </td> 
 		        <td bgcolor="">
 		            <p align="center"><span style="font-size:9pt;">
 		             ${data.maxGuestNum}</span></p>

@@ -56,16 +56,6 @@ function sendDelete(){
 			<tr>
 				<td width="150" height="20">
 					<p align="right">
-						<b><span style="font-size: 9pt;">현재 손님 수</span></b>
-					</p>
-				</td>
-				<td width="450" height="20"><b><span
-						style="font-size: 9pt;"> <input type=text name="guestNum"
-							size="50" value="${resultContent.guestNum}"></span></b></td>
-			</tr>
-			<tr>
-				<td width="150" height="20">
-					<p align="right">
 						<b><span style="font-size: 9pt;">최대 손님 수</span></b>
 					</p>
 				</td>

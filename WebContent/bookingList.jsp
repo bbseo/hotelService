@@ -68,7 +68,7 @@
 		            ${data.bookingNum}</span></p>
 		        </td>
 		        <td bgcolor="">
-		            <p align="center"><span style="font-size:9pt;">${data.memberName}</span></p>
+		            <p align="center"><span style="font-size:9pt;">${data.member_name}</span></p>
 		        </td>
 		        <td bgcolor="">
 		            <p align="center"><span style="font-size:9pt;">${data.roomNum}</span></p>

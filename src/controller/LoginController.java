@@ -58,13 +58,11 @@ public class LoginController extends HttpServlet {
 		
 		if(result == "Admin") {
 			adminSession.setAttribute("adminId" , id);
-			System.out.println("dfasdfsdfasd"+adminSession.getAttribute("adminId"));
 			response.sendRedirect("memberPage.jsp");
 		} 
 		else if(result == "Member") {
 			memberSession.setAttribute("memberId", id);
-			System.out.println(memberSession.getAttribute("memberId"));
-			response.sendRedirect("index.html");
+			response.sendRedirect("member");
 		}
 		else {
 			PrintWriter out = response.getWriter();
@@ -80,13 +78,11 @@ public class LoginController extends HttpServlet {
 	
 	public boolean checkId(HttpServletResponse response, HttpServletRequest request) throws IOException {
 		String id = request.getParameter("user_id");
-		System.out.println(id);
 		
 		boolean result = true;
 		
 		try {
 			result = LoginDAO.checkId(id);
-			System.out.println(result);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -122,7 +118,6 @@ public class LoginController extends HttpServlet {
 		String email = request.getParameter("email");
 		
 		
-		System.out.println(id + " " + email);
 		
 		String result = "";
 		
@@ -137,8 +132,6 @@ public class LoginController extends HttpServlet {
 	
 	public void logOut(HttpServletResponse response, HttpServletRequest request) throws IOException {
 		HttpSession session = request.getSession(false);
-		System.out.println(session.getAttribute("memberId"));
-		System.out.println(session.getAttribute("adminId"));
 		session.invalidate();
 		
 		response.sendRedirect("index.html");

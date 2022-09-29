@@ -5,25 +5,19 @@
 <!DOCTYPE html>
 <html>
 <head>
+
+<link href="./listAll.css" rel="stylesheet" type="text/css">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>memberList.jsp</title>
-<style type="text/css">
-	.member_search_wrapper {width: 1280px; margin: 0 auto; }
-	.member_search {text-align: right; }
-	.search_flex {display:flex; justify-content: flex-end; margin-bottom: 10px;}
-	.add_admin {font-family: 'Dongle', sans-serif; font-size: 1.5rem; background: #F8EDE3; border-radius: 0.5rem; cursor: pointer; border-width: 1px;}
-	.search_btn {font-family: 'Dongle', sans-serif; font-size: 1.5rem; background: #F8EDE3; border-radius: 0.5rem; cursor: pointer; border-width: 1px; margin-left: 1rem;}
-	.search_text{width: 10rem;  border:0; border-bottom: 1px solid #333; margin-left: 1rem; outline: 0;}
-	td {border-radius: 0.5rem;}
-</style>
+
 </head>
 <body>
 <%@ include file="./Header.jsp" %>
 
-<div class="member_search_wrapper">
+<div class="search_wrapper">
 <%@ include file="./Menu.jsp" %>
 		
-	<div class="member_search">
+	<div class="search_list">
 		<form name="search_member_list" method="post" action="admin">
 		    <div class="search_flex">
 		    <input type="hidden" name="command" value="memberList">
@@ -39,33 +33,33 @@
 	</div>
 	
 	<table align="center" border="0" cellpadding="5" cellspacing="2" width="100%" bordercolordark="white" bordercolorlight="black">
-		<tr>
-	        <td bgcolor="#F8EDE3">
-	            <p align="center"><font color="#BE8C63"><b><span style="font-size:9pt;">회원 코드</span></b></font></p>
+		<tr class="table_title">
+	        <td>
+	            <p align="center" class="text_color"><b><span style="font-size:9pt;">회원 코드</span></b></font></p>
 	        </td>
-	        <td bgcolor="#F8EDE3">
-	            <p align="center"><font color="#BE8C63"><b><span style="font-size:9pt;">아이디</span></b></font></p>
+	        <td>
+	            <p align="center" class="text_color"><b><span style="font-size:9pt;">아이디</span></b></font></p>
 	        </td>
-	        <td bgcolor="#F8EDE3">
-	            <p align="center"><font color="#BE8C63"><b><span style="font-size:9pt;">비밀번호</span></b></font></p>
+	         <td>
+	            <p align="center" class="text_color"><b><span style="font-size:9pt;">비밀번호</span></b></font></p>
 	        </td>
-	        <td bgcolor="#F8EDE3">
-	            <p align="center"><font color="#BE8C63"><b><span style="font-size:9pt;">이름</span></b></font></p>
+	         <td>
+	           <p align="center" class="text_color"><b><span style="font-size:9pt;">이름</span></b></font></p>
 	        </td>
-	        <td bgcolor="#F8EDE3">
-	            <p align="center"><font color="#BE8C63"><b><span style="font-size:9pt;">전화번호</span></b></font></p>
+	        <td>
+	            <p align="center" class="text_color"><b><span style="font-size:9pt;">전화번호</span></b></font></p>
 	        </td>
-	        <td bgcolor="#F8EDE3">
-	            <p align="center"><font color="#BE8C63"><b><span style="font-size:9pt;">이메일</span></b></font></p>
+	         <td>
+	            <p align="center" class="text_color"><b><span style="font-size:9pt;">이메일</span></b></font></p>
 	        </td>
-	        <td bgcolor="#F8EDE3">
-	            <p align="center"><font color="#BE8C63"><b><span style="font-size:9pt;">등급</span></b></font></p>
+	        <td>
+	            <p align="center" class="text_color"><b><span style="font-size:9pt;">등급</span></b></font></p>
 	        </td>
-	        <td bgcolor="#F8EDE3">
-	            <p align="center"><font color="#BE8C63"><b><span style="font-size:9pt;">구분</span></b></font></p>
+	         <td>
+	            <p align="center" class="text_color"><b><span style="font-size:9pt;">구분</span></b></font></p>
 	        </td>
-	        <td bgcolor="#F8EDE3">
-	            <p align="center"><font color="#BE8C63"><b><span style="font-size:9pt;">수정하기</span></b></font></p>
+	        <td>
+	            <p align="center" class="text_color"><b><span style="font-size:9pt;">수정하기</span></b></font></p>
 	        </td>
 	    </tr>
 	    
@@ -117,7 +111,7 @@
 		</c:forEach>
 	</table>
 	<hr>
-	<div style="display: flex; justify-content: flex-end"><button class="add_admin" onclick="location.href='addAdmin.jsp'">관리자 생성</button></div>
+	<div class="right_bot"><button class="add_btn" onclick="location.href='addAdmin.jsp'">관리자 생성</button></div>
 	
 </div>
 

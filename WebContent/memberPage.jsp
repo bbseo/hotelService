@@ -5,14 +5,6 @@
 <head>
 <meta charset="UTF-8">
 <title>memberPage</title>
-<style>
-	<body>
-		margin:0;
-		padding:0;
-	
-	</body>
-
-</style>
 </head>
 <body>
 

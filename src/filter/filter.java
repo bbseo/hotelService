@@ -31,10 +31,10 @@ public class filter implements Filter {
 		System.out.println("ServletPath : " + req.getServletPath());
 		System.out.println("Object.isNull : " + Objects.isNull(session.getAttribute("memberId")));
 		// 리스트에 포함되있다면 true && 세션이 없으면 true
-		if(!Arrays.asList(memberList).contains(req.getServletPath()) && Objects.isNull(session.getAttribute("memberId"))) {
-			res.sendRedirect("Login.jsp");
-			return;
-		}
+//		if(!Arrays.asList(memberList).contains(req.getServletPath()) && Objects.isNull(session.getAttribute("memberId"))) {
+//			res.sendRedirect("Login.jsp");
+//			return;
+//		}
 //		
 		chain.doFilter(request, response);
 	}

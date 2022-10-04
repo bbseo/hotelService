@@ -29,7 +29,7 @@ public class filter implements Filter {
 		HttpServletResponse res = (HttpServletResponse)response;
 		HttpSession session = req.getSession();
 		System.out.println("ServletPath : " + req.getServletPath());
-		System.out.println("Object.isNull : " + Objects.isNull(session.getAttribute("memberId")));
+		System.out.println("세션 유무(없으면 true) : " + Objects.isNull(session.getAttribute("memberId")));
 		// 리스트에 포함되있다면 true && 세션이 없으면 true
 		if(!Arrays.asList(memberList).contains(req.getServletPath()) && Objects.isNull(session.getAttribute("memberId"))) {
 			res.sendRedirect("Login.jsp");
